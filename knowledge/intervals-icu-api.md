@@ -60,8 +60,10 @@ curl -s -u "API_KEY:$INTERVALS_API_KEY" \
 ```bash
 curl -s -u "API_KEY:$INTERVALS_API_KEY" \
   "https://intervals.icu/api/v1/activity/ACTIVITY_ID?intervals=true" \
-  | jq '{id, name, type, start_date_local, distance, moving_time, elapsed_time, avg_hr, max_hr, total_elevation_gain, icu_training_load, icu_intensity, icu_efficiency_factor, average_speed, description, pace, icu_average_watts, calories, icu_intervals, icu_laps, icu_hr_zones, icu_pace_zones, icu_power_zones, icu_groups}'
+  | jq '{id, name, type, start_date_local, distance, moving_time, elapsed_time, avg_hr, max_hr, total_elevation_gain, icu_training_load, icu_intensity, icu_efficiency_factor, average_speed, description, pace, icu_average_watts, calories, icu_hr_zones, icu_pace_zones, icu_power_zones, icu_intervals: [.icu_intervals[]? | {type, label, distance, moving_time, elapsed_time, average_speed, gap, average_heartrate, max_heartrate, average_cadence, total_elevation_gain, average_gradient, zone, intensity}], icu_groups: [.icu_groups[]? | {id, count, distance, moving_time, average_speed, gap, average_heartrate, average_cadence, total_elevation_gain, zone}]}'
 ```
+
+This filters intervals to just the fields useful for coaching analysis (pace, HR, cadence, elevation, zone). Raw responses include ~70 fields per interval, most null — always filter.
 
 ### Get Activity Streams (time-series)
 

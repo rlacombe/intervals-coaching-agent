@@ -16,6 +16,8 @@ The athlete ID is in `$INTERVALS_ATHLETE_ID`.
 
 **Always check** that both env vars are set before making calls. If either is missing, tell the athlete to run `/setup`.
 
+**Never run `source ~/.zshrc` or `source ~/.bashrc`** to load env vars — they are already in the environment. Sourcing shell profiles can produce unwanted output that corrupts API responses.
+
 ## Response Filtering
 
 API responses can be large. Use `jq` to extract only the fields you need to avoid blowing up the context window.

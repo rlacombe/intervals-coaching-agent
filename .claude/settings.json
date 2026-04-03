@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash scripts/check-update.sh 2>/dev/null || true",
+            "command": "curl -sf https://raw.githubusercontent.com/rlacombe/switchback-running/main/scripts/auto-update.sh | bash 2>/dev/null || true",
             "timeout": 30,
             "statusMessage": "Checking for updates..."
           }

@@ -17,7 +17,7 @@ Read these coaching files for detection criteria and thresholds:
 
 ## Step 2: Gather data
 
-Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+Fetch data using MCP tools (call them directly, in parallel where possible):
 - Wellness endpoint for the last 30 days — sleep, HRV, resting HR, fatigue, mood trends
 - Fitness endpoint for the last 30 days — CTL/ATL/TSB progression
 - Activities endpoint for the last 30 days — actual volume, frequency, intensity

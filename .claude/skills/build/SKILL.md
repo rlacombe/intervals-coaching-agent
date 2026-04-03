@@ -19,7 +19,7 @@ Read these coaching files to inform workout design:
 
 ## Step 2: Gather context
 
-Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+Fetch data using MCP tools (call them directly, in parallel where possible):
 - Fitness endpoint for the last 14 days — current CTL/ATL/TSB trend
 - Activities endpoint for the last 14 days — recent training load and volume
 - Events endpoint for the date range the user is asking about — existing planned workouts

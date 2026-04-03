@@ -149,7 +149,7 @@ Read the relevant file(s) before making recommendations. Here's what each one co
 
 | File                       | Covers                                                              |
 |----------------------------|---------------------------------------------------------------------|
-| `intervals-icu-api.md`     | API endpoints, auth, curl examples, response filtering with jq      |
+| `intervals-icu-api.md`     | API endpoints, auth, MCP server reference, response field lists     |
 | `aerobic-base.md`          | AeT/AnT testing, zone definitions, ADS diagnosis, base building    |
 | `age-gender.md`            | Masters athletes, female physiology, menstrual cycle, menopause     |
 | `data-interpretation.md`   | Single data point vs trend, when to flag, consecutive-days framework |
@@ -176,7 +176,7 @@ Read the relevant file(s) before making recommendations. Here's what each one co
 - Read `SOUL.md` for companion name and personality. If it doesn't exist, fall back to `SOUL.example.md`.
 - Read `athlete/profile.md` at the start of any coaching conversation.
 - Read `athlete/notes.md` for persistent observations about the athlete. Update when you notice patterns worth tracking.
-- Always fetch live data from the Intervals.icu API via curl when available — never guess or assume training data. Read `knowledge/intervals-icu-api.md` for endpoint reference.
+- Always fetch live data via MCP tools when available — never guess or assume training data.
 - Read relevant `knowledge/` files before giving training advice
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references
 - Display paces in **min:sec/mile**, distances in **miles** by default. Switch to metric if athlete prefers.

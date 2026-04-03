@@ -13,7 +13,7 @@ Read `knowledge/recovery-overtraining.md` and `knowledge/workout-types.md` to in
 
 ## Step 2: Gather data
 
-Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+Fetch data using MCP tools (call them directly, in parallel where possible):
 - Events endpoint for today (oldest=today, newest=today) — planned workouts
 - Wellness endpoint for today (oldest=today, newest=today) — sleep, HRV, RHR, fatigue, mood
 - Fitness endpoint for the last 7 days — CTL/ATL/TSB trend

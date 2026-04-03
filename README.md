@@ -120,27 +120,24 @@ curl -fsSL https://raw.githubusercontent.com/rlacombe/switchback-running/main/in
 ```
 
 That's it. The installer will:
-- Create a **private copy** of Switchback under your GitHub account (your training data stays private)
+- Download the Switchback framework and create a local repo
+- Optionally create a **private GitHub repo** to back up your data (works with Claude Code Cloud too)
 - Install everything and set up the `switchback` command
-- Launch your companion for first-time setup — it'll walk you through connecting Intervals.icu, building your athlete profile, and choosing a name and personality for your companion
+- Launch your companion for first-time setup — connecting Intervals.icu, building your athlete profile, and choosing a companion personality
 
 **After that, just type `switchback` from anywhere to start a session.**
 
+You can also open your private repo in [Claude Code Desktop](https://claude.ai/code) or [Claude Code Cloud](https://claude.ai/code) — it works everywhere.
+
 ### Updating
 
-When there's a new version of Switchback (new features, updated training science), just run:
-
-```bash
-switchback update
-```
-
-This downloads the latest framework and updates your local copy without touching your personal data.
+**Updates happen automatically.** At the start of each session, Switchback checks for new versions and updates the framework in the background. Your personal data (athlete profile, companion notes, race plans) is never touched.
 
 ### How it works
 
-Switchback is not a traditional app — there's no UI, no server to run. The repository is a knowledge base and companion framework that your AI agent reads automatically. When you run `switchback`, your companion greets you, pulls your latest training data from Intervals.icu, and picks up where you left off.
+Switchback is not a traditional app — there's no UI, no server to run. The repository is a knowledge base and companion framework that your AI agent reads automatically. When you start a session, your companion greets you, pulls your latest training data from Intervals.icu, and picks up where you left off.
 
-Your personal data (athlete profile, training zones, coaching notes, companion persona) lives in your private copy and is never shared publicly. You can launch Switchback from any machine — your data travels with you.
+Your personal data (athlete profile, training zones, coaching notes, companion persona) lives in your private repo and is never shared publicly. You can launch Switchback from any machine — your data travels with you.
 
 ## Training Philosophy
 

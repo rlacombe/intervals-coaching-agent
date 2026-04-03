@@ -12,7 +12,7 @@ The user will provide a reason (e.g., "feeling tired", "knee is sore", "need to 
    - Schedule change: `knowledge/periodization.md` (preserve weekly structure principles)
    - Feeling great: `knowledge/volume-progression.md` (safe ramp limits)
    - Pain/injury concern: `knowledge/injury-prevention.md` (always recommend medical consultation first)
-1. Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+1. Fetch data using MCP tools (call them directly, in parallel where possible):
    - Wellness endpoint for the last 3 days
    - Fitness endpoint for the last 7 days
    - Events endpoint for the next 7 days

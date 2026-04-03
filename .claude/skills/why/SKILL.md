@@ -26,7 +26,7 @@ Read the relevant file(s). If the question spans multiple topics, read all of th
 
 ## Step 2: Gather athlete context (if relevant)
 
-If the question relates to the athlete's current training, call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`) to personalize the explanation:
+If the question relates to the athlete's current training, use MCP tools to personalize the explanation:
 - Zones are cached in `athlete/profile.md` — use those to reference actual numbers
 - Fitness endpoint — their current CTL/ATL/TSB
 - Activities or events endpoint — recent training context

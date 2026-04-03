@@ -18,7 +18,7 @@ Read these coaching files for expert protocols:
 
 ## Step 2: Gather data
 
-Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+Fetch data using MCP tools (call them directly, in parallel where possible):
 - Fitness endpoint for the last 21 days — CTL/ATL/TSB trend into race day
 - Events endpoint for the next 14 days — remaining workouts and taper check
 - Activities endpoint for the last 30 days — recent training volume and long runs

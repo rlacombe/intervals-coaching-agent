@@ -6,7 +6,7 @@ user-invocable: true
 # /week — Weekly Summary
 
 1. Determine the current week (Monday–Sunday). Read `knowledge/volume-progression.md` for safe ramp rates and recovery week guidelines, and `knowledge/periodization.md` for training phase context.
-2. Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+2. Fetch data using MCP tools (call them directly, in parallel where possible):
    - Activities endpoint for this week
    - Events endpoint for this week (planned)
    - Activities endpoint for last week (for comparison)

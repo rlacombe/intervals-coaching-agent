@@ -147,7 +147,7 @@ Read the relevant file(s) before making recommendations. Here's what each one co
 
 | File                       | Covers                                                              |
 |----------------------------|---------------------------------------------------------------------|
-| `intervals-icu-api.md`     | API endpoints, auth, curl examples, response filtering with jq      |
+| `intervals-icu-api.md`     | API endpoints, auth, MCP server reference, response field lists     |
 | `aerobic-base.md`          | AeT/AnT testing, zone definitions, ADS diagnosis, base building    |
 | `age-gender.md`            | Masters athletes, female physiology, menstrual cycle, menopause     |
 | `data-interpretation.md`   | Single data point vs trend, when to flag, consecutive-days framework |

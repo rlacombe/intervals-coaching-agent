@@ -6,7 +6,7 @@ user-invocable: true
 # /today — Morning Briefing
 
 1. Get today's date. Read `knowledge/recovery-overtraining.md` for overtraining warning signs and `knowledge/workout-types.md` for workout execution guidance.
-2. Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+2. Fetch data using MCP tools (call them directly, in parallel where possible):
    - Events endpoint for the next 14 days (oldest=today, newest=today+13) — today's workout plus the full training block ahead for context
    - Wellness endpoint for the last 3 days (oldest=today-2, newest=today) — trend context, not just a snapshot
    - Fitness endpoint for the last 7 days to show trend

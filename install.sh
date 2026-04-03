@@ -1,6 +1,6 @@
 #!/bin/bash
 # Switchback Running — one-command installer
-# Creates a private repo, populates it with the framework, and launches setup.
+# Creates a private repo with the framework + space for your personal data.
 #
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/rlacombe/switchback-running/main/install.sh | bash
@@ -11,32 +11,16 @@ UPSTREAM="rlacombe/switchback-running"
 REPO_NAME="switchback-personal"
 INSTALL_DIR="${SWITCHBACK_DIR:-$HOME/$REPO_NAME}"
 
-# ---- Helpers ----
-
 info()  { echo "  → $*"; }
 error() { echo "  ✗ $*" >&2; }
 ok()    { echo "  ✓ $*"; }
-
-# ---- Prerequisites ----
 
 echo ""
 echo "Switchback Running — installer"
 echo "==============================="
 echo ""
 
-# GitHub CLI
-if ! command -v gh &>/dev/null; then
-  error "GitHub CLI (gh) is required."
-  echo "    Install: https://cli.github.com"
-  exit 1
-fi
-
-# Check gh auth
-if ! gh auth status &>/dev/null 2>&1; then
-  error "GitHub CLI is not authenticated. Run: gh auth login"
-  exit 1
-fi
-ok "GitHub CLI authenticated"
+# ---- Prerequisites ----
 
 # At least one AI agent
 HAS_AGENT=false
@@ -53,64 +37,89 @@ if [ "$HAS_AGENT" = false ]; then
 fi
 ok "AI agent detected"
 
-# ---- Create private repo ----
+# ---- Already installed? ----
 
-echo ""
-GH_USER=$(gh api user -q .login)
-
-if [ -d "$INSTALL_DIR" ] && git -C "$INSTALL_DIR" remote get-url origin &>/dev/null 2>&1; then
+if [ -d "$INSTALL_DIR" ] && [ -f "$INSTALL_DIR/switchback.sh" ]; then
   info "Already installed at $INSTALL_DIR"
-  cd "$INSTALL_DIR"
-  ok "Using existing installation"
-else
-  # Create the private repo on GitHub if it doesn't exist
-  if gh repo view "$GH_USER/$REPO_NAME" &>/dev/null 2>&1; then
-    info "Repo already exists: $GH_USER/$REPO_NAME"
-  else
-    info "Creating private repo: $GH_USER/$REPO_NAME..."
-    gh repo create "$GH_USER/$REPO_NAME" --private --description "My Switchback Running companion"
-    ok "Created"
-  fi
-
-  # Clone it
-  info "Cloning to $INSTALL_DIR..."
-  gh repo clone "$GH_USER/$REPO_NAME" "$INSTALL_DIR" 2>/dev/null || git clone "https://github.com/$GH_USER/$REPO_NAME.git" "$INSTALL_DIR"
-  cd "$INSTALL_DIR"
-
-  # Populate from the framework tarball
-  info "Downloading Switchback framework..."
-  TMPDIR=$(mktemp -d)
-  trap "rm -rf $TMPDIR" EXIT
-  curl -sL "https://github.com/$UPSTREAM/tarball/main" | tar xz -C "$TMPDIR" --strip-components=1
-  cp -r "$TMPDIR"/. .
-
-  # Configure gitignore for personal data
-  sed -i.bak '/^SOUL\.md$/d' .gitignore
-  sed -i.bak '/^athlete\/\*$/d' .gitignore
-  sed -i.bak '/^!athlete\/\.gitignore$/d' .gitignore
-  sed -i.bak '/^!athlete\/profile\.example\.md$/d' .gitignore
-  rm -f .gitignore.bak
-  [ -f athlete/.gitignore ] && rm athlete/.gitignore
-
-  # Make scripts executable
-  chmod +x switchback.sh install.sh scripts/*.sh 2>/dev/null || true
-
-  # Initial commit
-  git add -A
-  git commit -m "Initial Switchback setup"
-  git push -u origin main 2>/dev/null || git push -u origin HEAD:main
-  ok "Framework installed"
+  info "Run: cd $INSTALL_DIR && ./switchback.sh"
+  exit 0
 fi
 
-# ---- Verify repo is private ----
+# ---- Download framework ----
 
-VISIBILITY=$(gh repo view "$GH_USER/$REPO_NAME" --json visibility -q .visibility 2>/dev/null || echo "UNKNOWN")
-if [ "$VISIBILITY" = "PUBLIC" ]; then
-  error "Your repo is public! Making it private..."
-  gh repo edit "$GH_USER/$REPO_NAME" --visibility private
-  ok "Repo is now private"
-elif [ "$VISIBILITY" = "PRIVATE" ]; then
-  ok "Repo is private"
+echo ""
+info "Downloading Switchback framework..."
+mkdir -p "$INSTALL_DIR"
+TMPDIR=$(mktemp -d)
+trap "rm -rf $TMPDIR" EXIT
+curl -sL "https://github.com/$UPSTREAM/tarball/main" | tar xz -C "$TMPDIR" --strip-components=1
+cp -r "$TMPDIR"/. "$INSTALL_DIR"/
+cd "$INSTALL_DIR"
+ok "Framework downloaded"
+
+# ---- Initialize git repo ----
+
+git init -q
+ok "Git repo initialized"
+
+# ---- Configure for personal data ----
+
+# Remove personal-data ignores so athlete/ and SOUL.md are tracked
+sed -i.bak '/^SOUL\.md$/d' .gitignore 2>/dev/null || true
+sed -i.bak '/^athlete\/\*$/d' .gitignore 2>/dev/null || true
+sed -i.bak '/^!athlete\/\.gitignore$/d' .gitignore 2>/dev/null || true
+sed -i.bak '/^!athlete\/profile\.example\.md$/d' .gitignore 2>/dev/null || true
+rm -f .gitignore.bak
+[ -f athlete/.gitignore ] && rm athlete/.gitignore
+
+# Create personal data from templates
+mkdir -p athlete
+[ ! -f SOUL.md ] && cp SOUL.example.md SOUL.md
+[ ! -f athlete/profile.md ] && cp athlete/profile.example.md athlete/profile.md
+[ ! -f athlete/notes.md ] && touch athlete/notes.md
+
+# Make scripts executable
+chmod +x switchback.sh scripts/*.sh 2>/dev/null || true
+
+# Install MCP server dependencies
+info "Installing dependencies..."
+npm install --silent 2>/dev/null || true
+ok "Dependencies installed"
+
+# Initial commit
+git add -A
+git commit -q -m "Initial Switchback setup"
+ok "Initial commit created"
+
+# ---- Private remote (optional) ----
+
+echo ""
+if command -v gh &>/dev/null && gh auth status &>/dev/null 2>&1; then
+  GH_USER=$(gh api user -q .login 2>/dev/null || echo "")
+  if [ -n "$GH_USER" ]; then
+    read -rp "  → Create a private GitHub repo ($GH_USER/$REPO_NAME) to back up your data? [Y/n] " answer
+    answer="${answer:-Y}"
+    if [[ "$answer" =~ ^[Yy] ]]; then
+      if gh repo view "$GH_USER/$REPO_NAME" &>/dev/null 2>&1; then
+        info "Repo already exists: $GH_USER/$REPO_NAME"
+        git remote add origin "https://github.com/$GH_USER/$REPO_NAME.git" 2>/dev/null || true
+      else
+        gh repo create "$REPO_NAME" --private --source=. --push
+      fi
+
+      # Verify it's private
+      VISIBILITY=$(gh repo view "$GH_USER/$REPO_NAME" --json visibility -q .visibility 2>/dev/null || echo "UNKNOWN")
+      if [ "$VISIBILITY" = "PUBLIC" ]; then
+        error "Repo is public! Making it private..."
+        gh repo edit "$GH_USER/$REPO_NAME" --visibility private
+      fi
+      ok "Private repo ready: https://github.com/$GH_USER/$REPO_NAME"
+    fi
+  fi
+else
+  info "GitHub CLI not found — skipping remote backup setup."
+  info "Your data is local. You can add a remote later with:"
+  echo "    gh repo create $REPO_NAME --private --source=. --push"
 fi
 
 # ---- Shell alias ----
@@ -138,14 +147,14 @@ if [ -n "$RC_FILE" ]; then
   fi
 fi
 
-# ---- Launch ----
+# ---- Done ----
 
 echo ""
 echo "==============================="
 echo "  Installation complete!"
-echo ""
-echo "  Your private repo: https://github.com/$GH_USER/$REPO_NAME"
 echo "  Installed to: $INSTALL_DIR"
+echo ""
+echo "  Framework updates happen automatically at each session start."
 echo ""
 echo "  Launching Switchback for first-time setup..."
 echo "  (This will connect Intervals.icu and build your athlete profile)"

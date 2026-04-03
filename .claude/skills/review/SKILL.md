@@ -6,7 +6,7 @@ user-invocable: true
 # /review — Post-Workout Analysis
 
 1. Get today's date. Read `knowledge/workout-types.md` to understand the purpose and targets of the workout type being reviewed. For long runs, also read `knowledge/long-runs.md`. For intervals, also read `knowledge/aerobic-base.md`.
-2. Call the Intervals.icu API via curl (see `knowledge/intervals-icu-api.md`). Run independent calls as parallel Bash tool calls:
+2. Fetch data using MCP tools (call them directly, in parallel where possible):
    - Activities endpoint for the last 3 days (to find the most recent)
    - Events endpoint for the last 3 days (to find matching planned workout)
 3. Identify the most recent activity and fetch its details from the activity endpoint (with intervals)

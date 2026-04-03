@@ -34,7 +34,7 @@ Check if `INTERVALS_API_KEY` and `INTERVALS_ATHLETE_ID` are set in the environme
 
 ## Step 2: Verify the connection
 
-Make a test API call to the wellness endpoint for today (see `knowledge/intervals-icu-api.md`). If it succeeds, tell the user the connection is working. If it fails, help them debug (wrong key, wrong athlete ID, etc.).
+Make a test call using the `get_wellness` MCP tool for today. If it succeeds, tell the user the connection is working. If it fails, help them debug (wrong key, wrong athlete ID, etc.).
 
 ## Step 3: Build the athlete profile
 
@@ -56,21 +56,13 @@ After gathering answers, write their data to `athlete/profile.md` (filling in th
 
 Then fetch zones from Intervals.icu using the athlete endpoint and populate the **Zones** section of `athlete/profile.md` with the athlete's actual HR zones, pace zones, LTHR, FTP, and max HR. This caches the zones locally so daily briefings and workout skills don't need to call the athlete endpoint every time. Tell the athlete they can ask you to refresh zones anytime if they update them in Intervals.icu.
 
-## Step 4: Configure fork for personal data
+## Step 4: Verify repo setup
 
-> **Note:** The install script (`install.sh`) handles this automatically. This step is a fallback for users who set up manually.
+Check that the athlete's personal data is being tracked (not gitignored). If `SOUL.md` or `athlete/profile.md` show up in `git status` as untracked, they need to be committed. If the `.gitignore` still ignores `athlete/*` or `SOUL.md`, remove those lines.
 
-Check if the user's repo is a private repo (not the public `rlacombe/switchback-running`):
+If the repo has a remote, check visibility with `gh repo view --json visibility`. If public, warn the athlete and help them make it private.
 
-1. **Check repo visibility.** Run `gh repo view --json visibility -q .visibility` on the origin repo. If the result is `PUBLIC`, **stop and warn the athlete**: "Your repo is public — your personal training data (health metrics, location, API keys) would be visible to anyone. Please make it private first: go to your repo's Settings → General → Danger Zone → Change visibility → Private." Do NOT proceed with un-ignoring personal data until the repo is private.
-2. **Un-ignore personal data** — remove these lines from `.gitignore`:
-   - `SOUL.md`
-   - `athlete/*` and `!athlete/.gitignore` and `!athlete/profile.example.md`
-3. **Remove `athlete/.gitignore`** — it's no longer needed since the parent `.gitignore` no longer excludes the directory.
-4. **Remove upstream remote** if present — it's no longer needed. Framework updates use `switchback update` instead.
-5. Tell the user: "Your repo is set up to track your personal data. To update the framework, run `switchback update`."
-
-If the origin **is** `rlacombe/switchback-running`, tell them: "You cloned the main repo directly. Your personal data will stay local and won't be backed up. Consider running the installer instead — see the README."
+Framework updates happen automatically via the SessionStart hook — no manual steps needed.
 
 ## Step 5: Personalize your companion
 

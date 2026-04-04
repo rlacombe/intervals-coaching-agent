@@ -2,7 +2,7 @@
 
 An AI-powered ultrarunning training companion. Switchback connects to your [Intervals.icu](https://intervals.icu) account — your training calendar, wellness data, and fitness trends — and uses [established exercise science](#recommended-reading) to help you train smarter and prepare for your next trail race. It works through natural conversation: reviewing workouts, adjusting plans, flagging risks, and answering questions about your training.
 
-Switchback is agent-agnostic — it works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Gemini CLI](https://github.com/google-gemini/gemini-cli), [Codex CLI](https://github.com/openai/codex), and [OpenClaw](https://github.com/openclaw/openclaw). Use whichever you prefer. **[switchback.run](https://switchback.run)**
+Switchback works with any AI agent — [Gemini CLI](https://github.com/google-gemini/gemini-cli) (free tier, no credit card), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex), or [OpenClaw](https://github.com/openclaw/openclaw). **[switchback.run](https://switchback.run)**
 
 ## Why This Exists
 

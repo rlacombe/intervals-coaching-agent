@@ -200,4 +200,5 @@ This project has slash commands available in Claude Code:
 | `/briefing` | Post a coaching note to your Intervals.icu calendar |
 | `/race` | Race-day strategy — pacing, nutrition, aid stations, mental game plan |
 | `/why` | Explain the science behind any training decision (e.g., `/why VO2max intervals`) |
+| `/nutrition` | Post-run nutrition analysis — water, carbs, sodium, caffeine intake |
 | `/check` | Deep health audit — overtraining signals, volume trends, injury risk |

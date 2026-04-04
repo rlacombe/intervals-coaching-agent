@@ -450,11 +450,11 @@
         const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.userAgent.indexOf('Mac') >= 0;
         const isWindows = navigator.platform.toUpperCase().indexOf('WIN') >= 0 || navigator.userAgent.indexOf('Win') >= 0;
         if (isMac) {
-          el.innerHTML = 'Open <strong style="color: var(--white);">Terminal</strong> — press <strong style="color: var(--white);">Cmd + Space</strong>, type <strong style="color: var(--white);">Terminal</strong>, hit Enter. Then paste the commands below.';
+          el.innerHTML = '💻 Open the <strong style="color: var(--white);">Terminal</strong> app on your Mac: press <strong style="color: var(--white);">Cmd + Space</strong>, type <strong style="color: var(--white);">Terminal</strong>, hit Enter. A window with text on a dark background will open — paste the commands below there.';
         } else if (isWindows) {
-          el.innerHTML = 'Open <strong style="color: var(--white);">PowerShell</strong> — press <strong style="color: var(--white);">Win + X</strong>, select <strong style="color: var(--white);">Terminal</strong>. You\'ll also need <a href="https://nodejs.org">Node.js</a> installed. Then paste the commands below.';
+          el.innerHTML = '💻 Open <strong style="color: var(--white);">PowerShell</strong> on your PC: press the <strong style="color: var(--white);">Windows key</strong>, type <strong style="color: var(--white);">PowerShell</strong>, hit Enter. A blue window with text will open — paste the commands below there. You\'ll also need <a href="https://nodejs.org">Node.js</a> installed.';
         } else {
-          el.innerHTML = 'Open your terminal and paste the commands below. You\'ll need <a href="https://nodejs.org">Node.js</a> installed.';
+          el.innerHTML = '💻 Open your terminal and paste the commands below. You\'ll need <a href="https://nodejs.org">Node.js</a> installed.';
         }
       })();
       </script>

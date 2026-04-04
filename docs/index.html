@@ -436,11 +436,9 @@
   <div class="dark-section" id="get-started">
     <div class="inner">
       <div class="section-label">Get started</div>
-      <h2>Two steps</h2>
-      <p>Switchback runs inside a terminal app called an AI agent. Pick one and install it, then install Switchback.</p>
+      <h2>One command</h2>
 
-      <div id="terminal-help" style="background: var(--charcoal); border-radius: 6px; padding: 1rem 1.2rem; margin: 1rem 0 1.5rem; font-size: 0.9rem;">
-        <p style="margin-bottom: 0.3rem;"><strong>First, open your terminal:</strong></p>
+      <div id="terminal-help" style="background: var(--charcoal); border-radius: 6px; padding: 1rem 1.2rem; margin: 0 0 1.5rem; font-size: 0.9rem;">
         <p id="terminal-instructions" style="color: var(--gray); margin: 0;"></p>
       </div>
 
@@ -450,39 +448,30 @@
         const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.userAgent.indexOf('Mac') >= 0;
         const isWindows = navigator.platform.toUpperCase().indexOf('WIN') >= 0 || navigator.userAgent.indexOf('Win') >= 0;
         if (isMac) {
-          el.innerHTML = '💻 Open the <strong style="color: var(--white);">Terminal</strong> app on your Mac: press <strong style="color: var(--white);">Cmd + Space</strong>, type <strong style="color: var(--white);">Terminal</strong>, hit Enter. A window with text on a dark background will open — paste the commands below there.';
+          el.innerHTML = '💻 Open the <strong style="color: var(--white);">Terminal</strong> app on your Mac: press <strong style="color: var(--white);">Cmd + Space</strong>, type <strong style="color: var(--white);">Terminal</strong>, hit Enter. Paste this and follow the prompts:';
         } else if (isWindows) {
-          el.innerHTML = '💻 Open <strong style="color: var(--white);">PowerShell</strong> on your PC: press the <strong style="color: var(--white);">Windows key</strong>, type <strong style="color: var(--white);">PowerShell</strong>, hit Enter. A blue window with text will open — paste the commands below there. You\'ll also need <a href="https://nodejs.org">Node.js</a> installed.';
+          el.innerHTML = '💻 Open <strong style="color: var(--white);">PowerShell</strong> on your PC: press the <strong style="color: var(--white);">Windows key</strong>, type <strong style="color: var(--white);">PowerShell</strong>, hit Enter. Paste this and follow the prompts:';
         } else {
-          el.innerHTML = '💻 Open your terminal and paste the commands below. You\'ll need <a href="https://nodejs.org">Node.js</a> installed.';
+          el.innerHTML = '💻 Open your terminal, paste this, and follow the prompts:';
         }
       })();
       </script>
 
-      <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>Step 1 — Install an agent</strong></p>
-
-      <div style="background: var(--charcoal); border: 2px solid var(--accent); border-radius: 8px; padding: 1.2rem 1.5rem; margin-bottom: 0.8rem;">
-        <p style="margin-bottom: 0.3rem;"><strong style="color: var(--accent);">Gemini CLI — Free</strong></p>
-        <p style="margin-bottom: 0.8rem; font-size: 0.9rem;">1,000 requests/day. No credit card. Just a Google account.</p>
-        <div class="install-cmd" style="margin: 0; border-color: var(--accent);" onclick="navigator.clipboard.writeText('npm install -g @google/gemini-cli'); this.querySelector('.copy-label').textContent = 'copied!'">
-          <span>npm install -g @google/gemini-cli</span>
-          <span class="copy-label" style="float: right; color: var(--gray); font-size: 0.75rem;">click to copy</span>
-        </div>
-      </div>
-
-      <p style="font-size: 0.85rem; color: var(--gray); margin-bottom: 1.5rem;">Also works with <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>, <a href="https://github.com/openai/codex">Codex CLI</a>, and <a href="https://github.com/openclaw/openclaw">OpenClaw</a>.</p>
-
-      <p style="margin-bottom: 0.5rem;"><strong>Step 2 — Install Switchback</strong></p>
       <div class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://raw.githubusercontent.com/rlacombe/switchback-running/main/install.sh | bash'); this.querySelector('.copy-label').textContent = 'copied!'">
         <span>curl -fsSL https://raw.githubusercontent.com/rlacombe/switchback-running/main/install.sh | bash</span>
         <span class="copy-label" style="float: right; color: var(--gray); font-size: 0.75rem;">click to copy</span>
       </div>
 
-      <p style="margin-top: 1.5rem; margin-bottom: 0.5rem;"><strong>Then run it:</strong></p>
-      <div class="install-cmd" style="border-color: var(--ash); color: var(--light);" onclick="navigator.clipboard.writeText('switchback'); this.querySelector('.copy-label').textContent = 'copied!'">
-        <span style="color: var(--gray);">$ </span><span>switchback</span>
-        <span class="copy-label" style="float: right; color: var(--gray); font-size: 0.75rem;">click to copy</span>
+      <p style="margin-top: 1.5rem;">The installer sets everything up. Then type:</p>
+
+      <div style="background: var(--charcoal); border: 2px solid #a855f7; border-radius: 10px; padding: 1.2rem 1.5rem; box-shadow: 0 0 25px rgba(168,85,247,0.2);">
+        <div class="install-cmd" style="margin: 0; border-color: #a855f7; color: #a855f7;" onclick="navigator.clipboard.writeText('switchback'); this.querySelector('.copy-label').textContent = 'copied!'">
+          <span style="color: var(--gray);">$ </span><span>switchback</span>
+          <span class="copy-label" style="float: right; color: var(--gray); font-size: 0.75rem;">click to copy</span>
+        </div>
       </div>
+
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--gray);">Free with <a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a> (no credit card needed). Also works with <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>, <a href="https://github.com/openai/codex">Codex CLI</a>, and <a href="https://github.com/openclaw/openclaw">OpenClaw</a>.</p>
     </div>
   </div>
 

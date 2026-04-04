@@ -29,13 +29,32 @@ command -v codex  &>/dev/null && HAS_AGENT=true
 command -v gemini &>/dev/null && HAS_AGENT=true
 
 if [ "$HAS_AGENT" = false ]; then
-  error "No AI agent found. Install at least one:"
-  echo "    Claude Code:  npm install -g @anthropic-ai/claude-code"
-  echo "    Gemini CLI:   npm install -g @google/gemini-cli"
-  echo "    Codex CLI:    npm install -g @openai/codex"
-  exit 1
+  info "No AI agent found. Switchback needs one to run."
+  echo ""
+  echo "  Gemini CLI is free (no credit card, just a Google account)."
+  echo ""
+  read -rp "  → Install Gemini CLI now? [Y/n] " answer
+  answer="${answer:-Y}"
+  if [[ "$answer" =~ ^[Yy] ]]; then
+    info "Installing Gemini CLI..."
+    npm install -g @google/gemini-cli 2>&1 | tail -1
+    if command -v gemini &>/dev/null; then
+      ok "Gemini CLI installed"
+    else
+      error "Installation failed. Try manually: npm install -g @google/gemini-cli"
+      exit 1
+    fi
+  else
+    echo ""
+    echo "  Install one of these and re-run:"
+    echo "    Gemini CLI (free):  npm install -g @google/gemini-cli"
+    echo "    Claude Code:        npm install -g @anthropic-ai/claude-code"
+    echo "    Codex CLI:          npm install -g @openai/codex"
+    exit 1
+  fi
+else
+  ok "AI agent detected"
 fi
-ok "AI agent detected"
 
 # ---- Already installed? ----
 

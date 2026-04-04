@@ -616,9 +616,18 @@
       return h;
     }
 
+    let maxHeight = 0;
+
+    function measureAllScenes() {
+      scenes.forEach(scene => {
+        const h = measureScene(scene);
+        if (h > maxHeight) maxHeight = h;
+      });
+      body.style.minHeight = maxHeight + 'px';
+    }
+
     function playScene(scene) {
-      const h = measureScene(scene);
-      body.style.minHeight = h + 'px';
+      body.innerHTML = '';
 
       // Prompt
       const promptEl = document.createElement('div');
@@ -679,6 +688,7 @@
     observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         observer.disconnect();
+        measureAllScenes();
         playScene(scenes[0]);
       }
     }, { threshold: 0.3 });

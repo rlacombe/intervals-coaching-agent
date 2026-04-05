@@ -1,8 +1,22 @@
-# Switchback Running
+# ⛰️ Switchback Running
 
-An AI-powered ultrarunning training companion. Switchback connects to your [Intervals.icu](https://intervals.icu) account — your training calendar, wellness data, and fitness trends — and uses [established exercise science](#recommended-reading) to help you train smarter and prepare for your next trail race. It works through natural conversation: reviewing workouts, adjusting plans, flagging risks, and answering questions about your training.
+**Training science companion for ultra trail.** Free and open-source.
 
-Switchback is agent-agnostic — it works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Gemini CLI](https://github.com/google-gemini/gemini-cli), and [Codex CLI](https://github.com/openai/codex). Use whichever you prefer.
+```
+⌚ Your Watch  →  📊 Intervals.icu  →  🤖 AI Agent  →  ⛰️ Switchback
+  (Garmin,          (free, syncs        (the brain,       (your training
+   Suunto, …)        your data)          free w/ Gemini)    companion)
+```
+
+## Quickstart
+
+```bash
+curl -fsSL switchback.run/install.sh | bash
+```
+
+The installer walks you through everything: installing an AI agent (free with [Gemini CLI](https://github.com/google-gemini/gemini-cli)), connecting [Intervals.icu](https://intervals.icu), and setting up your profile. Then type **`switchback`** to start.
+
+Also works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex), or [OpenClaw](https://github.com/openclaw/openclaw). More at **[switchback.run](https://switchback.run)**.
 
 ## Why This Exists
 
@@ -94,6 +108,7 @@ These slash commands are available in Claude Code. Other agents support the same
 | `/build` | Build structured workouts and training plans (e.g., `/build next week`) |
 | `/briefing` | Post a coaching note to your Intervals.icu calendar |
 | `/race` | Race-day strategy — pacing, nutrition, aid stations, mental game plan |
+| `/nutrition` | Post-run nutrition analysis — water, carbs, sodium, caffeine intake |
 | `/why` | Explain the science behind any training decision (e.g., `/why VO2max intervals`) |
 | `/check` | Deep health audit — overtraining signals, volume trends, injury risk |
 
@@ -107,16 +122,16 @@ These slash commands are available in Claude Code. Other agents support the same
 
 | Agent | Install command | Notes |
 |-------|---------|----------|
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `npm install -g @google/gemini-cli` | **Free tier** — 1,000 requests/day, no credit card, just a Google account |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | `npm install -g @anthropic-ai/claude-code` | Recommended — full experience with slash commands |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `npm install -g @google/gemini-cli` | Full experience with live data |
-| [Codex CLI](https://github.com/openai/codex) | `npm install -g @openai/codex` | Core companion (no live data yet) |
+| [Codex CLI](https://github.com/openai/codex) | `npm install -g @openai/codex` | Full experience with MCP support |
 
 ### Install
 
 Open a terminal and run:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rlacombe/switchback-running/main/install.sh | bash
+curl -fsSL switchback.run/install.sh | bash
 ```
 
 That's it. The installer will:
@@ -149,16 +164,16 @@ Three principles guide every recommendation:
 
 ### Knowledge Base
 
-The `knowledge/` directory contains 17 reference docs covering training science topics — from aerobic base and periodization to race execution and injury prevention. Each doc synthesizes positions from Johnston, Koop, Magness, and the Roches with specific protocols, quotes, and decision frameworks. Your companion reads these before making recommendations.
+The `knowledge/` directory contains 18 reference docs covering training science topics — from aerobic base and periodization to race execution and injury prevention. Each doc synthesizes positions from Johnston, Koop, Magness, and the Roches with specific protocols, quotes, and decision frameworks. Your companion reads these before making recommendations.
 
 ## Recommended Reading
 
 The training framework draws from these books. We recommend them for any ultrarunner who wants to understand the science behind their training:
 
-- **Training for the Uphill Athlete** by Scott Johnston, Steve House & Kilian Jornet — [Amazon](https://www.amazon.com/Training-Uphill-Athlete-Mountain-Mountaineers/dp/1938340841) | Coaching: [Evoke Endurance](https://evokeendurance.com) (Johnston) · [Uphill Athlete](https://uphillathlete.com)
-- **Training Essentials for Ultrarunners** by Jason Koop — [Amazon](https://www.amazon.com/Training-Essentials-Ultrarunning-Compete-Ultramarathon/dp/1937715566) | Coaching: [Jason Koop](https://jasonkoop.com) · [CTS](https://trainright.com)
-- **Science of Running** by Steve Magness — [Amazon](https://www.amazon.com/Science-Running-Efficiently-Ultramarathons-Sprints/dp/0615942946) | [stevemagness.com](https://stevemagness.com) · [scienceofrunning.com](https://scienceofrunning.com)
-- **The Happy Runner** by Dr. Megan Roche & David Roche — [Amazon](https://www.amazon.com/Happy-Runner-Lasting-Running-Success/dp/1492567647) | [swaprunning.com](https://www.swaprunning.com) · [Some Work All Play Podcast](https://podcasts.apple.com/us/podcast/some-work-all-play/id1463503118)
+- **Training for the Uphill Athlete** by Scott Johnston, Steve House & Kilian Jornet — [Amazon](https://www.amazon.com/Training-Uphill-Athlete-Mountain-Mountaineers/dp/1938340841) | [Evoke Endurance](https://evokeendurance.com) · [Uphill Athlete](https://uphillathlete.com)
+- **Training Essentials for Ultrarunners** by Jason Koop — [Amazon](https://www.amazon.com/Training-Essentials-Ultrarunning-Compete-Ultramarathon/dp/1937715566) | [jasonkoop.com](https://jasonkoop.com) · [CTS](https://trainright.com)
+- **Science of Running** by Steve Magness — [Amazon](https://www.amazon.com/Science-Running-Efficiently-Ultramarathons-Sprints/dp/0615942946) | [stevemagness.com](https://stevemagness.com)
+- **The Happy Runner** by Dr. Megan Roche & David Roche — [Amazon](https://www.amazon.com/Happy-Runner-Lasting-Running-Success/dp/1492567647) | [SWAP Running](https://www.swaprunning.com)
 
 This project is not affiliated with any of these authors or organizations. If you can work with them directly, you should — Switchback is not a substitute for a real coaching relationship.
 

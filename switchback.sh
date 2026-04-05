@@ -155,7 +155,7 @@ echo "" >> "$CONTEXT"
 
 case "$AGENT" in
   claude)
-    exec claude -c --append-system-prompt-file "$CONTEXT" "Hey!"
+    exec claude --append-system-prompt-file "$CONTEXT" "Hey!"
     ;;
 
   codex)

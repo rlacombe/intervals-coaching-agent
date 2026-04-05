@@ -374,7 +374,51 @@
       margin-bottom: 1rem;
     }
 
+    /* --- Pipeline diagram --- */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2.5rem 0;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+    }
+
+    .pipeline-card {
+      background: var(--charcoal);
+      border: 1px solid var(--ash);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .pipeline-icon { font-size: 1.8rem; margin-bottom: 0.3rem; }
+    .pipeline-title { color: var(--white); }
+    .pipeline-sub { color: var(--gray); font-family: 'Barlow', sans-serif; text-transform: none; letter-spacing: 0; font-size: 0.75rem; margin-top: 0.2rem; }
+    .pipeline-arrow { color: var(--gray); font-size: 1.5rem; }
+
     /* --- Responsive --- */
+    @media (max-width: 700px) {
+      .pipeline {
+        flex-direction: column;
+        align-items: center;
+      }
+      .pipeline-arrow {
+        transform: rotate(90deg);
+      }
+      .pipeline-card {
+        width: auto;
+        min-width: 180px;
+        max-width: 220px;
+        flex: none;
+      }
+    }
+
     @media (max-width: 600px) {
       .hero { padding: 3rem 1.5rem; }
       .hero h1 { font-size: 3rem; }
@@ -425,14 +469,6 @@
     </div>
   </div>
 
-  <div class="callout-section">
-    <div class="inner">
-      <h3>Not a coach.</h3>
-      <p>Switchback is a companion: presenting your data, explaining tradeoffs, and letting you decide. <strong style="color: var(--accent);">When you can work with a real coach, you absolutely should.</strong> Switchback is for the many of us who train alone and want something better than a static plan.</p>
-      <p style="margin-top: 1rem; font-size: 0.85rem; color: #666;">This project is for informational and educational purposes only. It is not medical advice. Always consult a qualified healthcare professional before starting or modifying a training program. Stay safe out there.</p>
-    </div>
-  </div>
-
   <div class="divider"></div>
 
   <div class="dark-section">
@@ -440,33 +476,33 @@
       <div class="section-label">How it works</div>
       <h2>Your watch. Your data. Your companion.</h2>
 
-      <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin: 2.5rem 0; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem;">
-        <div style="background: var(--charcoal); border: 1px solid var(--ash); border-radius: 8px; padding: 1rem 1.5rem; text-align: center;">
-          <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">⌚</div>
-          <div style="color: var(--white);">Your watch</div>
-          <div style="color: var(--gray); font-family: 'Barlow', sans-serif; text-transform: none; letter-spacing: 0; font-size: 0.75rem; margin-top: 0.2rem;">Garmin, Suunto, COROS,<br>Apple Watch, Strava...</div>
+      <div class="pipeline">
+        <div class="pipeline-card">
+          <div class="pipeline-icon">⌚</div>
+          <div class="pipeline-title">Your watch</div>
+          <div class="pipeline-sub">Garmin, Suunto, COROS,<br>Apple Watch, Strava...</div>
         </div>
-        <div style="color: var(--gray); font-size: 1.5rem;">→</div>
-        <div style="background: var(--charcoal); border: 1px solid var(--ash); border-radius: 8px; padding: 1rem 1.5rem; text-align: center;">
-          <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">📊</div>
-          <div style="color: var(--white);"><a href="https://intervals.icu" style="color: var(--white); text-decoration: none;">Intervals.icu</a></div>
-          <div style="color: var(--gray); font-family: 'Barlow', sans-serif; text-transform: none; letter-spacing: 0; font-size: 0.75rem; margin-top: 0.2rem;">Free. Syncs your<br>training data automatically.</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-card">
+          <div class="pipeline-icon">📊</div>
+          <div class="pipeline-title"><a href="https://intervals.icu" style="color: var(--white); text-decoration: none;">Intervals.icu</a></div>
+          <div class="pipeline-sub">Free. Syncs your<br>training data.</div>
         </div>
-        <div style="color: var(--gray); font-size: 1.5rem;">→</div>
-        <div style="background: var(--charcoal); border: 1px solid var(--accent); border-radius: 8px; padding: 1rem 1.5rem; text-align: center;">
-          <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">⛰️</div>
-          <div style="color: var(--accent);">Switchback</div>
-          <div style="color: var(--gray); font-family: 'Barlow', sans-serif; text-transform: none; letter-spacing: 0; font-size: 0.75rem; margin-top: 0.2rem;">Reads your data.<br>Grounds it in science.</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-card">
+          <div class="pipeline-icon">🤖</div>
+          <div class="pipeline-title">AI Agent</div>
+          <div class="pipeline-sub">The brain.<br>Free with Gemini CLI.</div>
         </div>
-        <div style="color: var(--gray); font-size: 1.5rem;">→</div>
-        <div style="background: var(--charcoal); border: 1px solid var(--ash); border-radius: 8px; padding: 1rem 1.5rem; text-align: center;">
-          <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">💬</div>
-          <div style="color: var(--white);">You</div>
-          <div style="color: var(--gray); font-family: 'Barlow', sans-serif; text-transform: none; letter-spacing: 0; font-size: 0.75rem; margin-top: 0.2rem;">Ask anything about<br>your training.</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-card" style="border-color: var(--accent);">
+          <div class="pipeline-icon">⛰️</div>
+          <div class="pipeline-title" style="color: var(--accent);">Switchback</div>
+          <div class="pipeline-sub">Your training companion.<br>Grounded in exercise science.</div>
         </div>
       </div>
 
-      <p>Switchback runs in your terminal — a text window on your computer. The installer walks you through everything: connecting your watch data, setting up your profile, and choosing a companion personality. No coding required.</p>
+      <p>The agent is the brain. Switchback is the companion — training science built in. Both run in your terminal — the installer sets everything up for you. No coding required.</p>
     </div>
   </div>
 
@@ -494,21 +530,27 @@
       })();
       </script>
 
-      <div class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL switchback.run/install.sh | bash'); this.querySelector('.copy-label').textContent = 'copied!'">
+      <div class="install-cmd" style="box-shadow: 0 0 30px rgba(255,107,43,0.3), 0 0 60px rgba(255,107,43,0.1);" onclick="navigator.clipboard.writeText('curl -fsSL switchback.run/install.sh | bash'); this.querySelector('.copy-label').textContent = 'copied!'">
         <span>curl -fsSL switchback.run/install.sh | bash</span>
         <span class="copy-label" style="float: right; color: var(--gray); font-size: 0.75rem;">click to copy</span>
       </div>
 
       <p style="margin-top: 1rem; font-size: 0.9rem;">The installer guides you step by step — no coding needed. When it's done, type:</p>
 
-      <div style="background: var(--charcoal); border: 2px solid #a855f7; border-radius: 10px; padding: 1.2rem 1.5rem; box-shadow: 0 0 25px rgba(168,85,247,0.2);">
-        <div class="install-cmd" style="margin: 0; border-color: #a855f7; color: #a855f7;" onclick="navigator.clipboard.writeText('switchback'); this.querySelector('.copy-label').textContent = 'copied!'">
-          <span style="color: var(--gray);">$ </span><span>switchback</span>
-          <span class="copy-label" style="float: right; color: var(--gray); font-size: 0.75rem;">click to copy</span>
-        </div>
+      <div class="install-cmd" style="border-width: 2px; box-shadow: 0 0 30px rgba(255,107,43,0.35), 0 0 60px rgba(255,107,43,0.15);" onclick="navigator.clipboard.writeText('switchback'); this.querySelector('.copy-label').textContent = 'copied!'">
+        <span style="color: var(--gray);">$ </span><span style="color: var(--accent);">switchback</span>
+        <span class="copy-label" style="float: right; color: var(--gray); font-size: 0.75rem;">click to copy</span>
       </div>
 
       <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--gray);">Free with <a href="https://github.com/google-gemini/gemini-cli">Gemini CLI</a> (no credit card needed). Also works if you use <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a>, <a href="https://github.com/openai/codex">Codex CLI</a>, or <a href="https://github.com/openclaw/openclaw">OpenClaw</a>.</p>
+    </div>
+  </div>
+
+  <div class="callout-section">
+    <div class="inner">
+      <h3>Not a coach.</h3>
+      <p>Switchback is a companion: presenting your data, explaining tradeoffs, and letting you decide. <strong style="color: var(--accent);">When you can work with a real coach, you absolutely should.</strong> Switchback is for the many of us who train alone and want something better than a static plan.</p>
+      <p style="margin-top: 1rem; font-size: 0.85rem; color: #666;">This project is for informational and educational purposes only. It is not medical advice. Always consult a qualified healthcare professional before starting or modifying a training program. Stay safe out there.</p>
     </div>
   </div>
 
@@ -559,13 +601,15 @@
     <div class="inner">
       <div class="section-label">The science</div>
       <h2>Train By The Book</h2>
+      <p>The authors of these books made exercise science accessible to self-coached trail runners. Switchback stands on their shoulders.</p>
       <ul class="books">
         <li><a class="title" href="https://www.amazon.com/Training-Uphill-Athlete-Mountain-Mountaineers/dp/1938340841">Training for the Uphill Athlete</a> <span class="author">&mdash; Johnston, House &amp; Jornet</span><br><span class="author"><a href="https://evokeendurance.com">Evoke Endurance</a> &middot; <a href="https://uphillathlete.com">Uphill Athlete</a></span></li>
         <li><a class="title" href="https://www.amazon.com/Training-Essentials-Ultrarunning-Compete-Ultramarathon/dp/1937715566">Training Essentials for Ultrarunners</a> <span class="author">&mdash; Jason Koop</span><br><span class="author"><a href="https://jasonkoop.com">jasonkoop.com</a> &middot; <a href="https://trainright.com">CTS</a></span></li>
         <li><a class="title" href="https://www.amazon.com/Science-Running-Efficiently-Ultramarathons-Sprints/dp/0615942946">Science of Running</a> <span class="author">&mdash; Steve Magness</span><br><span class="author"><a href="https://stevemagness.com">stevemagness.com</a></span></li>
         <li><a class="title" href="https://www.amazon.com/Happy-Runner-Lasting-Running-Success/dp/1492567647">The Happy Runner</a> <span class="author">&mdash; Dr. Megan Roche &amp; David Roche</span><br><span class="author"><a href="https://www.swaprunning.com">SWAP Running</a></span></li>
       </ul>
-      <p>Buy the books. They're excellent, and they'll make you a better athlete. We're not affiliated with any of these authors. If you can work with them directly, you should!</p>
+      <p><strong style="color: var(--accent);">Buy the books. Seriously.</strong> Understanding your own body and how to prepare it for a race is worth every page. Read them and your runs will be richer — and Switchback more useful. You'll also support authors who've dedicated their careers to helping runners like us go after our dreams.</p>
+      <p><strong>We're not affiliated with these authors.</strong> If you can work with them directly, you should!</p>
     </div>
   </div>
 

@@ -1,8 +1,22 @@
-# Switchback Running
+# ⛰️ Switchback Running
 
-An AI-powered ultrarunning training companion. Switchback connects to your [Intervals.icu](https://intervals.icu) account — your training calendar, wellness data, and fitness trends — and uses [established exercise science](#recommended-reading) to help you train smarter and prepare for your next trail race. It works through natural conversation: reviewing workouts, adjusting plans, flagging risks, and answering questions about your training.
+**Training science companion for ultra trail.** Free and open-source.
 
-Switchback works with any AI agent — [Gemini CLI](https://github.com/google-gemini/gemini-cli) (free tier, no credit card), [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex), or [OpenClaw](https://github.com/openclaw/openclaw). Get started at **[switchback.run](https://switchback.run)**.
+```
+⌚ Your Watch  →  📊 Intervals.icu  →  🤖 AI Agent  →  ⛰️ Switchback
+  (Garmin,          (free, syncs        (the brain,       (your training
+   Suunto, …)        your data)          free w/ Gemini)    companion)
+```
+
+## Quickstart
+
+```bash
+curl -fsSL switchback.run/install.sh | bash
+```
+
+The installer walks you through everything: installing an AI agent (free with [Gemini CLI](https://github.com/google-gemini/gemini-cli)), connecting [Intervals.icu](https://intervals.icu), and setting up your profile. Then type **`switchback`** to start.
+
+Also works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex), or [OpenClaw](https://github.com/openclaw/openclaw). More at **[switchback.run](https://switchback.run)**.
 
 ## Why This Exists
 

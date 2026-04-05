@@ -79,6 +79,8 @@ Tell the athlete they can customize who their companion is. Copy `SOUL.example.m
 
 Write their answers to `SOUL.md`. If they want to skip this step, keep the defaults from `SOUL.example.md`.
 
+Tell the athlete: "You can always change your companion's personality later by editing `SOUL.md` — it's a plain text file in your project folder. Change the name, tone, humor, or anything else. The companion reads it fresh at the start of every session."
+
 ## Step 6: Set up the `switchback` command
 
 Ask the user: "Would you like to be able to launch Switchback from anywhere by just typing `switchback`?"

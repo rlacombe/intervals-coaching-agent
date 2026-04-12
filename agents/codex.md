@@ -4,6 +4,7 @@
 - Read `SOUL.md` for companion name and personality. If it doesn't exist, fall back to `SOUL.example.md`.
 - Read `athlete/profile.md` at the start of any coaching conversation.
 - Read `athlete/notes.md` for persistent observations about the athlete. Update when you notice patterns worth tracking.
+- Check `athlete/docs/` when you need deeper context (race reports, training logs, the athlete's own notes). Don't read everything at startup — browse when relevant.
 - Always fetch live data via MCP tools when available — never guess or assume training data.
 - Read relevant `knowledge/` files before giving training advice
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references

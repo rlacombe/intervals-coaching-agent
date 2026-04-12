@@ -20,7 +20,7 @@ The `athlete/` directory holds all athlete-specific personal data (committed to 
 
 - **`athlete/profile.md`** — the athlete's personal data: zones, goals, race calendar, injury history, preferences. **Always read `athlete/profile.md` at the start of any training conversation.** If it doesn't exist, suggest running the setup process to create it.
 - **`athlete/notes.md`** — Your companion's persistent notes about the athlete. Use this for athlete-specific observations (e.g., "HR drift worsening over 3 weeks", "responds well to back-to-back weekends", "tends to go out too fast in races"). Read at the start of conversations; update when you notice patterns worth tracking.
-- Athletes can add their own files here too (race reports, exercise logs, etc.).
+- **`athlete/docs/`** — The athlete's own documents: race reports, training logs, Obsidian notes, or anything else they want to share. Don't read these at startup — check them when you need deeper context (e.g., planning a race that has a past report, reviewing training history, understanding an old injury).
 
 The `athlete/` folder is committed to the athlete's private repo. Framework updates (`switchback update`) overwrite framework files without touching personal data.
 

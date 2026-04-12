@@ -57,7 +57,20 @@ After gathering answers, write their data to `athlete/profile.md` (filling in th
 
 Then fetch zones from Intervals.icu using the athlete endpoint and populate the **Zones** section of `athlete/profile.md` with the athlete's actual HR zones, pace zones, LTHR, FTP, and max HR. This caches the zones locally so daily briefings and workout skills don't need to call the athlete endpoint every time. Tell the athlete they can ask you to refresh zones anytime if they update them in Intervals.icu.
 
-## Step 4: Verify repo setup
+## Step 4: Import existing notes
+
+Ask: "Do you have any existing training notes, race reports, or logs you'd like to share? Things like Obsidian notes, markdown files, text files — anything that would help me understand your training history better."
+
+**If yes:**
+1. Ask for the folder path (e.g., `~/Documents/Obsidian/Running/`).
+2. Create the `athlete/docs/` directory if it doesn't exist.
+3. Copy all `.md` and `.txt` files from the source folder into `athlete/docs/`, preserving filenames. If there are subdirectories, flatten them — prefix filenames with the subfolder name to avoid collisions (e.g., `races/western-states.md` → `races-western-states.md`).
+4. Tell the athlete how many files were imported and list them.
+5. Let them know: "I won't read all of these at once — I'll check them when they're relevant, like when we're planning a race you've run before or reviewing your training history. You can add more files anytime by dropping them in `athlete/docs/`."
+
+**If no:** Move on. Mention they can always add files to `athlete/docs/` later.
+
+## Step 5: Verify repo setup
 
 Check that the athlete's personal data is being tracked (not gitignored). If `SOUL.md` or `athlete/profile.md` show up in `git status` as untracked, they need to be committed. If the `.gitignore` still ignores `athlete/*` or `SOUL.md`, remove those lines.
 
@@ -65,7 +78,7 @@ If the repo has a remote, check visibility with `gh repo view --json visibility`
 
 Framework updates happen automatically via the SessionStart hook — no manual steps needed.
 
-## Step 5: Personalize your companion
+## Step 6: Personalize your companion
 
 Tell the athlete they can customize who their companion is. Copy `SOUL.example.md` to `SOUL.md` as a starting point, then ask:
 
@@ -82,7 +95,7 @@ Write their answers to `SOUL.md`. If they want to skip this step, keep the defau
 
 Tell the athlete: "You can always change your companion's personality later by editing `SOUL.md` — it's a plain text file in your project folder. Change the name, tone, humor, or anything else. The companion reads it fresh at the start of every session."
 
-## Step 6: Set up the `switchback` command
+## Step 7: Set up the `switchback` command
 
 Ask the user: "Would you like to be able to launch Switchback from anywhere by just typing `switchback`?"
 
@@ -100,6 +113,6 @@ If yes:
 
 If they decline, tell them they can always run `./switchback.sh` from the project directory.
 
-## Step 7: Done
+## Step 8: Done
 
 Tell them they're all set — greet them by name using their new companion persona. Suggest they try `switchback` (or `/today`) to see their first morning briefing, or just start chatting.

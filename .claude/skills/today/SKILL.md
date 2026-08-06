@@ -13,7 +13,7 @@ user-invocable: true
    - Weather endpoint using the athlete's lat/lon from their profile — current conditions and forecast
    - Zones are cached in `athlete/profile.md` — skip the athlete endpoint unless the zones section is missing
 3. Display:
-   - **Today's Workout:** Name, type, planned distance/duration. If the workout has structured steps, show target zones/paces using the athlete's actual zone values. If rest day, say so.
+   - **Today's Workout:** Name, type, planned distance/duration. If the workout has structured steps, show its targets using the athlete's actual zone values — paces for a run, **watts and %FTP for a ride**, per-100 pace for a swim. If rest day, say so.
    - **This Week / Next Week:** Brief overview of the 2-week plan ahead — session names, days, types. Highlight the training block context (build week? recovery week? race week?) so today's workout makes sense in the bigger picture.
    - **Wellness:** Sleep, HRV, resting HR, fatigue, mood (whatever is available)
    - **Form Status:** Current TSB with label (fresh/neutral/tired/fatigued)

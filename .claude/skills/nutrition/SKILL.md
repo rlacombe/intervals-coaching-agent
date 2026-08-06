@@ -1,9 +1,9 @@
 ---
-description: "Post-run nutrition analysis — compute water, carbs, sodium, and caffeine intake"
+description: "Post-session nutrition analysis — compute water, carbs, sodium, and caffeine intake"
 user-invocable: true
 ---
 
-# /nutrition — Post-Run Nutrition Analysis
+# /nutrition — Post-Session Nutrition Analysis
 
 Computes total and per-hour intake of water, carbohydrates, sodium, and caffeine from the athlete's reported fueling, then adds a summary note to the Intervals.icu event.
 

@@ -9,8 +9,8 @@ The platform's own docs are scattered across forum threads; sources at the botto
 ## The five non-negotiable rules
 
 1. **`m` means minutes. Never meters.** Use `mtr` for meters, `km` for kilometers, `mi` for miles. `400m` parses as "400 minutes." This single mistake is the most common cause of broken workouts.
-2. **One intensity target per step.** HR and Pace **cannot** be combined on the same step — the parser drops one or fails. Pick whichever target matches the intent of that step. (Confirmed by Sam, the platform author, in the forum thread.)
-3. **Every step must have a quantitative target.** Never write `- 5m easy`. "Easy" is not a target. Use `Z1 HR`, `Z1 Pace`, `60% Pace`, `65% HR`, etc. — always a zone, a percentage, or an absolute value.
+2. **One intensity target per step.** `HR`, `Pace`, and `Power` **cannot** be combined on the same step — the parser drops one or fails. Pick whichever target matches the intent of that step. (Confirmed by Sam, the platform author, in the forum thread.)
+3. **Every step must have a quantitative target.** Never write `- 5m easy`. "Easy" is not a target. Use `Z1 HR`, `Z1 Pace`, `Z2 Power`, `60% Pace`, `88-94% Power`, `250W`, etc. — always a zone, a percentage, or an absolute value.
 4. **Every step starts with `- ` (dash + space).** Section headers (`Warmup`, `Main Set`, `Cooldown`) are the only lines without a leading dash.
 5. **Every interval has a paired recovery.** Strides, reps, intervals — each fast step needs a recovery step inside the same repeat block. The Garmin watch needs both halves to lap correctly.
 
@@ -28,12 +28,15 @@ If any of these are violated, the workout will display in Intervals.icu's web vi
 | Element | Examples |
 |---|---|
 | Duration | `1h`, `45m`, `30s`, `1m30s`, `5'`, `30"` |
-| Distance | `1km`, `5km`, `1mi`, `4.5mi`, `400mtr` |
+| Distance | `1km`, `5km`, `1mi`, `4.5mi`, `400mtr` (swim sets use distance, not time) |
 | Pace zone | `Z1 Pace`, `Z2 Pace`, `Z3-Z4 Pace` |
 | HR zone | `Z1 HR`, `Z2 HR`, `Z2-Z3 HR` |
 | Pace % | `60% Pace`, `78-82% Pace`, `90% Pace` (of threshold pace) |
 | HR % | `70% HR`, `75-80% HR` (of max HR) |
 | LTHR % | `90-95% LTHR`, `95% LTHR` (of threshold HR) |
+| Power zone | `Z2 Power`, `Z5 Power` (bike: **seven** zones, not five) |
+| Power % | `88-94% Power`, `55% Power` (of FTP) |
+| Absolute power | `250W` |
 | Absolute pace | `5:00/km Pace`, `8:30/mi Pace` |
 | Ramp | `10m ramp 60%-75% Pace`, `15m ramp Z1-Z2 HR` |
 | Cadence | append `90rpm` after target |
@@ -90,9 +93,23 @@ Main Set
 
 ---
 
-## Intensity targets for running
+## Intensity targets
 
-Every step needs **one** of these, chosen based on what the step is for.
+Every step needs **one** target, chosen based on what the step is for. The
+available target keywords are `Pace`, `HR`, `Power`, and `LTHR`. Which of them
+makes sense depends on the sport:
+
+| Sport | Primary target | Secondary | Notes |
+|---|---|---|---|
+| Run | `Pace` | `HR` | Needs a threshold pace configured, or `% Pace` resolves against nothing |
+| Bike | `Power` | `HR` | Needs FTP configured. Power is the correct anchor for almost every bike step |
+| Swim | `Pace` (per 100) | — | Prescribe **distance** steps, not time. Needs swim pace zones configured |
+| Row, ski erg | `Pace` or `Power` | `HR` | Follows whichever the athlete's device reports |
+
+**Check the athlete's configured zones before writing anything.** A `% Pace`
+target on a run with no `threshold_pace` set, or a `% Power` target with no
+`ftp`, produces steps the watch cannot enforce. `athlete/profile.md` caches
+this; `get_athlete` refreshes it.
 
 ### Pace targets
 
@@ -106,7 +123,37 @@ Every step needs **one** of these, chosen based on what the step is for.
 - **HR as % of max HR:** `70% HR`, `75-80% HR`. 100% = max HR.
 - **HR as % of LTHR:** `90-95% LTHR`, `95% LTHR`. 100% = lactate threshold HR.
 
-### Picking HR vs Pace per step
+### Power targets (cycling)
+
+Verified against the Intervals.icu parser, 2026-08-06:
+
+- **Power zones:** `Z1 Power` … `Z7 Power`. Parses to `{units: "power_zone"}`.
+  Cycling uses **seven** zones (Coggan), not five — Z6 is anaerobic and Z7 is
+  neuromuscular, so do not assume the five-zone running layout.
+- **Power as % of FTP:** `88-94% Power`, `55% Power`. Parses to `{units: "%ftp"}`.
+  100% = FTP. This is the most precise and most portable form.
+- **Absolute watts:** `250W`. Parses to `{units: "w"}`. Use when the athlete
+  thinks in watts for a specific effort, otherwise prefer `% Power`.
+
+Sweet spot is `88-94% Power`. Threshold is `95-105% Power`. See
+`cycling-endurance.md` for the full zone table and what each is for.
+
+### Swim targets
+
+Verified against the parser, 2026-08-06:
+
+- **Prescribe distance, not time:** `200mtr Z1 Pace`, `100mtr Z4 Pace`. Swim
+  sets are counted in metres or yards; a time-based swim step is almost always
+  the wrong shape.
+- **Rest steps are time-based:** `30s Z1 Pace`. Pair every work step with its
+  rest inside the repeat block, exactly as with running strides.
+- `mtr` for metres — **not** `m`, which means minutes. This bites hardest in
+  swim workouts, where `100m` reads as 100 minutes.
+- Zones resolve against the athlete's swim pace zones, expressed per 100.
+  Critical Swim Speed is the swim analogue of threshold — see `swimming.md`
+  for the 400/200 test that establishes it.
+
+### Picking HR vs Pace vs Power per step
 
 Since you can only have one target per step, pick the one that matches the intent:
 
@@ -122,6 +169,26 @@ Since you can only have one target per step, pick the one that matches the inten
 | Recovery jog between intervals | **HR** (`Z1 HR` or under 70% HR) | The point is HR drop, not pace. |
 
 **Why this works:** the athlete's pace zones and HR zones in Intervals.icu are calibrated to the same physiological intensities. A step prescribed at `Z3 Pace` will land roughly in `Z3 HR` anyway — you're just choosing which one the watch enforces as the alert.
+
+On the bike the logic is simpler, because power is instantaneous and does not
+lag or drift:
+
+| Step type | Anchor to | Why |
+|---|---|---|
+| Warmup, cooldown | **Power** (`Z1 Power` / `55% Power`) | No reason to use HR when power is exact from second one. |
+| Endurance / base rides | **Power** (`Z2 Power`) | The whole point is holding a band; HR drifts upward over hours at fixed power. |
+| Long ride where drift is the *subject* | **HR** (`Z2 HR`) | Only when deliberately studying decoupling — see `cycling-endurance.md`. |
+| Sweet spot, tempo | **Power** (`88-94% Power`) | Precision is the entire prescription. |
+| Threshold | **Power** (`95-105% Power`) | HR cannot track a 5–20 min effort accurately. |
+| VO2 max | **Power** (`106-120% Power`) | HR arrives far too late on 3–5 min reps. |
+| Sprints, neuromuscular | **Power** (`Z7 Power`) | Under 30 s, no metric keeps up perfectly; Z7 keeps the step quantitative and exportable. |
+
+**Default to power on the bike.** HR belongs on a bike step only when heart rate
+itself is the object of study, or when the athlete has no power meter.
+
+In the water, `Pace` is the only target that makes sense — HR straps are
+unreliable when submerged and there is no power. Prescribe distance and let
+pace zones carry the intensity.
 
 ### Garmin export and "every second accounted for"
 
@@ -311,6 +378,7 @@ Total time: 5 + 30 + (4 × 1m) + 5 = **44 minutes**. Always state estimated dura
 ## Reference templates
 
 Copy these as starting points. All have been validated against the parser rules.
+The running templates come first, then cycling, then swimming.
 
 ### Easy aerobic run + strides
 
@@ -362,8 +430,7 @@ Cooldown
 Warmup
 - 15m ramp 60-75% Pace
 
-Build
-- 4x
+Build 4x
 - 30s 95% Pace 90rpm
 - 30s Z1 HR
 
@@ -422,6 +489,151 @@ Cooldown
 **Notes:** Time-on-feet focus. Eat 60-80g carbs/hr. Carry electrolytes — temps forecast 75°F.
 ```
 
+### Endurance ride (bike)
+
+```
+Warmup
+- 15m ramp 50-65% Power
+
+Main Set
+- 2h30m Z2 Power
+
+Cooldown
+- 10m 55% Power
+```
+
+### Sweet spot intervals (bike)
+
+```
+Warmup
+- 15m ramp 50-70% Power
+
+Main Set 3x
+- 12m 88-94% Power
+- 5m Z1 Power
+
+Cooldown
+- 10m 55% Power
+```
+
+### Threshold intervals (bike)
+
+```
+Warmup
+- 20m ramp 50-75% Power
+
+Main Set 4x
+- 8m 95-105% Power
+- 4m Z1 Power
+
+Cooldown
+- 10m 55% Power
+```
+
+### VO2 max intervals (bike)
+
+```
+Warmup
+- 20m ramp 50-80% Power
+
+Main Set 5x
+- 3m 110-120% Power
+- 3m Z1 Power
+
+Cooldown
+- 10m 55% Power
+```
+
+### Durability ride — efforts placed late (bike)
+
+Fatigue resistance is trained by putting the work at the *end* of a long ride,
+not the beginning. See `cycling-endurance.md`.
+
+```
+Warmup
+- 10m 55% Power
+
+Endurance
+- 2h30m Z2 Power
+
+Late Efforts 3x
+- 10m 88-94% Power
+- 5m Z2 Power
+
+Cooldown
+- 10m 55% Power
+```
+
+### Race-pace brick — bike leg (triathlon)
+
+Ride at race Intensity Factor, then run off the bike. Create the run as a
+separate event at the same time; Intervals.icu does not model transitions.
+Target IF by distance: 0.78–0.85 for a 70.3, 0.65–0.75 for an Ironman — see
+`triathlon.md`.
+
+```
+Warmup
+- 15m ramp 50-65% Power
+
+Race Simulation
+- 2h 70-75% Power
+
+Cooldown
+- 10m 55% Power
+```
+
+### Aerobic swim with technique focus
+
+```
+Warmup
+- 400mtr Z1 Pace
+
+Drills 4x
+- 50mtr Z2 Pace
+- 20s Z1 Pace
+
+Main Set
+- 1200mtr Z2 Pace
+
+Cooldown
+- 200mtr Z1 Pace
+```
+
+### Threshold swim at Critical Swim Speed
+
+```
+Warmup
+- 400mtr Z1 Pace
+
+Main Set 8x
+- 100mtr Z4 Pace
+- 15s Z1 Pace
+
+Cooldown
+- 200mtr Z1 Pace
+```
+
+### Open-water race simulation (swim)
+
+```
+Warmup
+- 300mtr Z1 Pace
+
+Start Surge
+- 200mtr Z5 Pace
+
+Settle
+- 1500mtr Z3 Pace
+
+Cooldown
+- 200mtr Z1 Pace
+```
+
+---
+
+**Notes:** In the wetsuit. Sight every 6 strokes. Rehearses the start surge and
+the recovery from it — see `swimming.md`.
+
 ---
 
 ## Validation checklist
@@ -429,7 +641,7 @@ Cooldown
 Before calling `create_event`, run the description through this checklist:
 
 - [ ] Every step starts with `- `.
-- [ ] No step combines HR and Pace targets.
+- [ ] No step combines two targets (HR, Pace, and Power are mutually exclusive per step).
 - [ ] No step uses prose like "easy", "steady", "moderate" instead of a target.
 - [ ] No bare `m` is being used for meters (use `mtr`, `km`, or `mi`).
 - [ ] Every fast interval has a paired recovery step inside the same repeat block.
@@ -438,8 +650,13 @@ Before calling `create_event`, run the description through this checklist:
 - [ ] Repeats use `Nx` either as a section header suffix (`Main Set 4x`) or on their own line.
 - [ ] Blank lines separate sections and repeat blocks.
 - [ ] No nested repeats.
-- [ ] No `(0w)`, `200w`, or other power targets on Run-type workouts (unless the athlete has a Stryd or equivalent run power meter — check profile first).
 - [ ] Estimated duration matches sum of step durations.
+
+Sport-specific:
+
+- [ ] **Run** — no power target unless the athlete has a Stryd or equivalent run power meter (check profile first). `% Pace` requires a configured `threshold_pace`.
+- [ ] **Bike** — target is `Power` unless heart rate is deliberately the subject. `% Power` requires a configured `ftp`. Remember cycling has **seven** zones, so `Z6`/`Z7` are valid here and not on a run.
+- [ ] **Swim** — steps are **distance** (`mtr`/`km`/`yd`), not time, except rest steps. Never `100m` for 100 metres — that parses as 100 minutes. Requires configured swim pace zones.
 
 When in doubt, dry-run the description against the **Worked example** above.
 

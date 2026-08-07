@@ -10,7 +10,7 @@ user-invocable: true
    | Sport | Read |
    |---|---|
    | Run | `workout-types.md`; `long-runs.md` for long runs; `aerobic-base.md` for intervals |
-   | Bike | `cycling-endurance.md`; `multiday-events.md` if part of consecutive days |
+   | Bike | `cycling-workouts.md` for what the session was meant to do; `cycling-endurance.md`; `multiday-events.md` if part of consecutive days |
    | Swim | `swimming.md` |
    | Triathlon / brick | `triathlon.md` |
 2. Fetch data using MCP tools (call them directly, in parallel where possible):

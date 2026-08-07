@@ -58,6 +58,34 @@ For an athlete who is not swim-limited by fitness, drafting is the single larges
 - Shoulder flexibility is the cost. A suit that restricts the catch can cancel its own benefit.
 - Legality is temperature-dependent and governed by the race body. Practise in the suit; do not race in an untested one.
 
+### Swimmer's Shoulder
+The characteristic swimming injury, and the reason swimming is not the
+consequence-free discipline it is often assumed to be. Shoulder pain is reported
+by a large fraction of competitive swimmers — study figures vary widely, from
+roughly 40% to over 80% across a career — and the mechanism is repetition under
+a technique fault rather than any single overload.
+
+**This is a referral, not a training adjustment.** Persistent shoulder pain,
+night pain, or weakness goes to a doctor or physiotherapist first. What follows
+is context for that conversation.
+
+- **Volume is the amplifier, technique is the cause.** A swimmer covering
+  3,000 m does on the order of a thousand strokes per arm. A fault repeated that
+  often is what does the damage, not the yardage in isolation.
+- **The faults that most often implicate the shoulder:** crossing the midline at
+  entry, a dropped elbow through the catch, thumb-first entry, and insufficient
+  body roll — which forces the shoulder to reach through a range the torso should
+  have supplied.
+- **The equipment that most often aggravates it:** paddles, which raise load per
+  stroke exactly where the load already is; extended band-only pull sets; and any
+  sharp increase in volume.
+- **Protective work:** scapular stability and external rotation, thoracic
+  mobility, and sane paddle use. Detail in `strength-training.md`.
+- **The training consequence:** shoulder pain is one of the few situations where
+  the answer is a technical intervention and a video session rather than rest —
+  because rest returns the swimmer to the same stroke.
+
+
 ## What the Experts Say
 
 ### Sheila Taormina (Swim Speed Secrets; Olympic swimmer and triathlete)

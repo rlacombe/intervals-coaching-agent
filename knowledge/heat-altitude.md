@@ -1,5 +1,11 @@
 # Heat & Altitude
 
+> **Scope: all sports, with running examples.** Acclimation physiology is
+> discipline-independent. Two things differ in practice and are covered at the
+> end: a cyclist gets substantial evaporative cooling from road speed that a
+> runner does not, and open-water swimming introduces cold-water risk that has no
+> running equivalent.
+
 ## Summary
 Heat and altitude are environmental stressors that sit near the top of Koop's hierarchy of ultramarathon training needs -- they are enhancements that matter only after all the fundamentals are in place. However, for races like Western States (heat), Leadville (altitude), or Hardrock (both), failing to prepare for these conditions can turn a well-trained athlete into a DNF. Koop provides the most comprehensive protocols: 7-10 days of consecutive heat exposure, sauna protocols, and specific altitude arrival guidelines. Magness contributes the neuroscience of anticipatory thermoregulation -- the brain reduces muscle activation in heat before core temperature becomes dangerous. Johnston's coverage is limited, largely confined to altitude's effect on aerobic training, but his aerobic base philosophy indirectly supports performance at altitude. The Roches' coverage is also limited, but they contribute useful principles on training consistency for blood volume, total stress management at altitude, and cross-training options during environmental stress blocks. All sources agree that acclimatization is real, trainable, and time-dependent.
 
@@ -236,6 +242,62 @@ Heat and altitude are environmental stressors that sit near the top of Koop's hi
 - Hydration becomes doubly important -- both heat and altitude increase fluid requirements
 - Expect combined performance decrement of 10-20% compared to sea-level, mild conditions
 - Iron status is critical -- get tested 3 months out
+
+## Discipline Differences: Airflow, Power, and Cold Water
+
+The acclimation physiology above is discipline-independent. Three practical
+differences are not.
+
+### Cycling: speed is cooling, so heat stress is uneven
+A cyclist at 30 km/h sits in a 30 km/h wind. The convective and evaporative
+cooling that provides is far beyond anything a runner gets at 12 km/h, which is
+why a hot ride can feel comfortable on the flat and become dangerous the moment
+the road tilts up. Heat stress on the bike concentrates in exactly two places:
+
+- **Climbs** — speed collapses, power stays high, airflow disappears.
+- **Indoors** — zero airflow at any power. The turbo trainer is the hottest
+  environment most endurance athletes ever train in, and it is the reason indoor
+  power runs 5–10 W below outdoor at matched effort (see
+  `cycling-endurance.md`). A large fan is not a comfort item; it is what makes
+  the session physiologically comparable.
+
+Two consequences worth stating to an athlete: sweat losses on the bike are
+routinely underestimated because the sweat evaporates before it is noticed, and
+**indoor riding is a convenient, low-risk heat-acclimation tool** — the protocols
+above transfer directly, with the trainer supplying the heat instead of the
+weather.
+
+### Altitude: power detects the decrement, pace hides it
+The physiology is unchanged, but the measurement is better on the bike. Pace at
+altitude is confounded by terrain and gradient; power is not. Expect a
+measurable reduction in sustainable power that scales with altitude, and expect
+it to be visible from the first ride rather than inferred. Set expectations in
+watts before the trip and the athlete will argue with the numbers less.
+
+### Cold water: a risk with no running equivalent
+Water conducts heat roughly 25 times faster than air, so open-water swimming
+introduces failure modes that no amount of running experience prepares an athlete
+for.
+
+- **Cold shock is the first three minutes, and it is the dangerous part.**
+  Involuntary gasp, hyperventilation, and a sharp rise in heart rate and blood
+  pressure on immersion, most pronounced in water around 10–15°C. This — not
+  hypothermia — is what causes most cold-water drownings, and it happens before
+  core temperature has moved at all. Entering gradually and floating until
+  breathing settles is the mitigation.
+- **Swim failure precedes hypothermia.** Progressive loss of hand and arm
+  function makes the stroke ineffective while the athlete still feels capable.
+- **Hypothermia is the slow one:** shivering, then confusion and slurred speech.
+  Confusion in cold water is an emergency, and the affected athlete will not be
+  the one to recognize it.
+- **Practical rules:** never swim alone in open water, know the water
+  temperature before entering, acclimatize across sessions rather than in one,
+  use a wetsuit and a tow float, and treat a race body's wetsuit-mandatory and
+  cancellation thresholds as floors rather than advice. See `swimming.md` for
+  wetsuit selection.
+- **Cold on the bike** is milder but real: a long descent after a sweaty climb
+  combines wet kit, evaporation, and windchill. Carry a layer for any ride with
+  significant descending.
 
 ## Sources & Further Reading
 

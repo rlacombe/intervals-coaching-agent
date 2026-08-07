@@ -1,5 +1,11 @@
 # Muscular Endurance
 
+> **Scope: running and cycling.** The debate below is argued entirely in running
+> terms because that is where it originated. Cycling's version of the same
+> question is prescribed in watts rather than in reps and is covered at the end
+> of the file. Swimming has no direct equivalent — its limiter is technical, not
+> muscular. See `swimming.md`.
+
 ## Summary
 Muscular endurance (ME) -- the capacity to maintain a high percentage of muscle contractile force for thousands of repetitions -- may be the most important yet most debated quality in ultrarunning. Johnston considers it a central pillar of training and credits it for coaching both 2025 UTMB winners. Koop argues that ME develops adequately through progressive, terrain-specific running and that gym-based ME circuits offer only temporary, limited gains. Magness bridges the gap with running-based strength endurance circuits inspired by Renato Canova and Arthur Lydiard. The Roches (David Roche and Dr. Megan Roche / SWAP Running) offer a fourth perspective: build ME from speed, not the other way around. Their approach develops top-end smooth speed first, then converts that speed into sustained strength at longer efforts -- "fast needs to feel smooth, or eventually hard will become slow."
 
@@ -207,6 +213,57 @@ Ran 14:51 for 100 miles and 2:40 at Boston Marathon in the same year. Initially 
    - No improvement week to week = likely doing too much, not too little (Johnston).
    - Persistent heavy legs beyond 72 hours post-ME session = reduce load or increase recovery.
    - Falling HR during hard uphill efforts (despite increasing effort) = frontier fiber fatigue. Sign that ME training is addressing the right limiter.
+
+## Muscular Endurance on the Bike
+
+The whole debate above is argued in running terms. On the bike the same quality
+exists, it is measured differently, and — importantly — the Johnston-versus-Koop
+disagreement resolves more cleanly than it does in running.
+
+### It already has a name: durability
+What ultrarunners call muscular endurance, cyclists call durability or fatigue
+resistance: the ability to still produce power after several hours of work. It
+is now recognized as a trait separate from FTP, and two riders with identical
+fresh threshold power can differ by 15–20% in their threshold after 3,000 kJ of
+work. See `cycling-endurance.md`.
+
+The advantage of the cycling framing is that it is **directly measurable**.
+Compare normalized power for the last hour of a long ride against the first at
+matched perceived effort, or look at the power-duration curve after a fixed
+amount of work. No equivalent measurement exists in running, which is part of
+why the running debate has stayed unresolved for so long.
+
+### How it is trained
+In watts and hours, not in reps and carries:
+
+- **Efforts placed late in long rides**, never early. Three by fifteen minutes at
+  sweet spot in the last hour of a four-hour ride is the canonical session.
+- **Long endurance rides at genuine endurance power** — the volume itself is the
+  stimulus.
+- **Back-to-back days**, which is the specific preparation for a tour or brevet.
+  See `multiday-events.md`.
+- **Reduced-carbohydrate-availability sessions**, used sparingly and never
+  before key work.
+
+### Where the gym argument lands differently
+Johnston's case for gym-based muscular endurance rests on local muscular fatigue
+being the limiter, and on the difficulty of loading a runner's legs enough
+without wrecking them. **Neither premise holds well on the bike.** Cycling can
+reproduce race-specific loading for hours at a time at essentially no injury
+cost, so the reason to leave the bike and go to the gym is weaker than it is in
+running. Koop's "specificity develops it" position is on stronger ground here
+than it is in his own sport.
+
+This is not an argument against cyclists lifting — the case for that is real, but
+it rests on economy and bone density rather than on muscular endurance. See
+`strength-training.md`.
+
+### The one thing not to do
+Low-cadence, high-torque work is the intuitive bike analogue of a weighted carry,
+and its evidence base as a distinct adaptation is thin — forces in cycling sit
+far below what limits muscular strength. The joint loading, meanwhile, is real.
+It is **contraindicated outright for any rider with patellofemoral or meniscal
+history**. See the disagreement section in `cycling-endurance.md`.
 
 ## Sources & Further Reading
 

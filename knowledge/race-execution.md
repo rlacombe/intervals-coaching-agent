@@ -1,5 +1,11 @@
 # Race-Day Execution
 
+> **Scope: trail ultrarunning.** Aid stations, cutoffs, crew, and the pacing
+> model below are ultra-specific. Bike-leg pacing by intensity factor is in
+> `triathlon.md`; pacing across consecutive days is in `multiday-events.md`. The
+> ADAPT crisis framework and the psychology of pacing generalize to any long
+> event in any sport.
+
 ## Summary
 Race-day execution separates finishers from DNFs and good races from great ones. Fitness is fixed by race morning -- everything beyond that is execution: pacing, nutrition, aid station management, mental strategy, and adaptation when plans fail. Koop provides the most comprehensive race-execution framework with his perceived exertion endpoint interaction model, the ADAPT framework for crisis management, and his bull's-eye nutrition system. Magness contributes the neuroscience of pacing -- anticipatory regulation, the peak-end rule, and associative vs. dissociative mental strategies. Johnston's contributions are largely embedded in his athletes' race reports and the durability-first philosophy. The Roches add the strategic layer: race prioritization (1-4 "A" races per year), the argument that 10K fitness is the bellwether for all distances, and a resilience-first approach to DNFs. Mastering execution is a learnable skill that improves with deliberate practice across B and C races.
 

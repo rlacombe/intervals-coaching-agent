@@ -44,7 +44,7 @@ Then read for the sport in question:
 | Building | Read |
 |---|---|
 | Running | `workout-types.md`, `long-runs.md` (long runs), `muscular-endurance.md` (ME sessions) |
-| Cycling | `cycling-endurance.md` — power zones, sweet spot vs polarized, durability |
+| Cycling | `cycling-workouts.md` — the session library; `cycling-endurance.md` for power zones, sweet spot vs polarized, durability |
 | Swimming | `swimming.md` — CSS, technique vs volume, open-water specifics |
 | Triathlon | `triathlon.md` — hour allocation, bricks, bike Intensity Factor by distance |
 | Multi-day / stage events | `multiday-events.md` — back-to-back progression, overnight fuelling |

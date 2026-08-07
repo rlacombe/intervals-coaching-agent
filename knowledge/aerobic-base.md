@@ -1,5 +1,12 @@
 # Aerobic Base & Zone Training
 
+> **Scope: concepts universal, test protocols running.** Aerobic and anaerobic
+> threshold, the aerobic-deficiency argument, and polarized distribution apply to
+> every endurance sport. Every field test below is a running test. The same
+> threshold is measured as functional threshold power on the bike
+> (`cycling-endurance.md`) and as critical swim speed in the water
+> (`swimming.md`) — one construct, three measurement traditions.
+
 ## Summary
 The aerobic base is the foundation of all ultrarunning performance. For events lasting hours, the ability to produce speed at the aerobic threshold determines finishing pace far more than VO2max or anaerobic power. All four experts agree that the majority of training volume should be easy, but they diverge on how to define intensity zones, whether Aerobic Deficiency Syndrome is real, and whether heart rate or perceived exertion should govern training intensity. The Roches add a hormonal and consistency-focused lens, emphasizing cortisol management, blood volume adaptations, and the dangers of "mission creep" on easy days.
 

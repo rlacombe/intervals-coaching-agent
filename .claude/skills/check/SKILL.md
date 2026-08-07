@@ -11,7 +11,8 @@ Goes deeper than `/today`'s daily snapshot. Analyzes multi-week trends to flag o
 
 Read these coaching files for detection criteria and thresholds:
 - `knowledge/recovery-overtraining.md` — FOR/NFOR/OTS stages, detection methods, warning signs
-- `knowledge/injury-prevention.md` — red flags, volume ramp limits, return protocols
+- `knowledge/injury-prevention.md` — red flags, volume ramp limits, return protocols (running; impact-injury model)
+- `knowledge/cycling-injury-bike-fit.md` — for a cycling-dominant athlete: positional causes, numbness rules, bone density
 - `knowledge/volume-progression.md` — 10% rule, build:recovery ratios, CTL ramp rates
 - `knowledge/age-gender.md` — age/gender-specific recovery considerations
 

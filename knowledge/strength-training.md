@@ -1,5 +1,10 @@
 # Strength Training
 
+> **Scope: all sports.** The physiology — concurrent training, force-based fibre
+> recruitment, rate of force development — does not change by discipline. The
+> expert positions below are argued in running terms; discipline-specific
+> programming for cyclists and swimmers is at the end of the file.
+
 ## Summary
 Strength training for ultrarunners is the most polarizing topic among the primary coaches. Johnston treats it as an essential progression from general strength through maximum strength to muscular endurance, integrated throughout the training year. Koop is the most skeptical, arguing that rest and sleep provide equal or better injury prevention benefits at lower cost to the training budget. Magness focuses on neuromuscular coordination -- hill sprints, plyometrics, and strides -- as the most efficient way to improve fiber recruitment and running economy without the overhead of traditional gym work. The Roches (David Roche and Dr. Megan Roche) take a minimal effective dose approach -- short, simple routines done consistently, recognizing that most athletes are time-limited and don't love strength work. Their philosophy: prioritize non-running maintenance so that injury stuff doesn't cause you to be a non-runner.
 
@@ -259,6 +264,65 @@ The Roches consider foam rolling as essential as brushing your teeth. "Foam roll
 
 6. **Is the athlete over 40?**
    - Yes: Strength training shifts from optional to essential. "For aging athletes, strength training isn't just corrective or ergogenic, it's essential for general health and well-being." (Koop, Ch. 11) Minimum 2x/week year-round, even at the expense of some running volume. Focus on heavy compound movements to counter muscle mass loss.
+
+## Programming for Cyclists and Swimmers
+
+The physiology above is universal; the exercise selection and the *reason* for
+lifting are not. In running, the primary argument for strength work is injury
+prevention. On the bike and in the water the argument is different in each case,
+and in one of them it is stronger than it is for runners.
+
+### Cyclists
+**The evidence here is unusually good.** Bent Rønnestad's group has repeatedly
+shown that heavy, low-repetition strength training added to endurance training
+improves cycling economy, time to exhaustion, and — most relevantly — power late
+in a long effort, without meaningful hypertrophy in endurance-trained riders.
+This is one of the more consistently replicated concurrent-training findings in
+the literature, and it is a good deal stronger than the equivalent evidence in
+running.
+
+**The second reason is bone.** Cycling is non-weight-bearing, and cyclists who
+train exclusively on the bike show lower bone mineral density than both runners
+and sedentary controls. For an athlete who has moved to cycling *because*
+running is no longer tolerated, resistance training stops being optional and
+becomes the only load their skeleton gets. Say this plainly rather than leaving
+it implied. See `cycling-injury-bike-fit.md`.
+
+- **Emphasis:** posterior chain and single-leg — squat or leg press, deadlift or
+  Romanian deadlift, step-ups, hip thrust, calf work.
+- **Loading:** heavy and low-repetition (roughly 4–6 reps, 3–4 sets), not
+  endurance-style circuits. The adaptation being sought is neural and
+  economy-related; high-repetition work adds fatigue without it.
+- **Trunk:** anti-extension and anti-rotation work, which is what lets a rider
+  hold a position without loading the hands. Relevant to the neck, low-back, and
+  hand complaints in `cycling-injury-bike-fit.md`.
+- **Impact, if joints tolerate it:** low-volume hops or jumps for bone. Skip
+  entirely where there is a joint contraindication — the bone argument never
+  outranks the joint.
+- **Frequency:** 2×/week in base and build, 1×/week maintenance in peak and
+  taper.
+
+### Swimmers
+The shoulder is the injury site, and the goal is to protect it rather than to
+add propulsive strength — pulling power transfers far less than swimmers expect,
+because propulsion in water is about the catch, not about how much can be pulled
+on land.
+
+- **Emphasis:** scapular stability (serratus anterior, lower trapezius),
+  rotator-cuff external rotation, and thoracic mobility. This is the highest-value
+  work and it is prehab, not performance work.
+- **Watch total overhead volume.** A swimmer is already doing thousands of
+  overhead repetitions per session. Adding heavy overhead pressing on top is how
+  a manageable shoulder becomes a painful one.
+- **Trunk work supports body position** — a swimmer who cannot hold a line
+  drags the legs, and that is a strength problem the water will not fix.
+- **Land pulling has limited transfer.** Band work and paddles used sparingly
+  reinforce the catch; a heavy lat pulldown mostly does not. See `swimming.md`.
+
+### Scheduling, unchanged across sports
+On easy days or after a hard session, never before key work. See the scheduling
+guidance above — the concurrent-training interference effect does not care which
+sport the endurance session was.
 
 ## Sources & Further Reading
 

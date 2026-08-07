@@ -1,5 +1,12 @@
 # Injury Prevention & Management
 
+> **Scope: running.** This is the impact-injury model — load progressed against
+> tissue tolerance. Cycling injuries are mostly positional rather than
+> load-driven and are covered in `cycling-injury-bike-fit.md`; swimming's
+> characteristic problem is the shoulder, covered in `swimming.md`. The red-flag
+> rules, the professional-referral thresholds, and the return-to-activity
+> principles generalize. The specific injuries and the ramp arithmetic do not.
+
 ## Summary
 
 Injury prevention in ultrarunning begins with load management, sleep, and nutrition —

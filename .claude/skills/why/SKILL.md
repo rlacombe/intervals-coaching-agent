@@ -21,8 +21,9 @@ Map the athlete's question to the relevant knowledge base file(s) in `knowledge/
 - strength-training.md, periodization.md, long-runs.md, taper.md
 - race-execution.md, recovery-overtraining.md, heat-altitude.md, mental-performance.md
 - nutrition.md, downhill-training.md, injury-prevention.md, age-gender.md
-- cycling-endurance.md, cycling-workouts.md, cycling-injury-bike-fit.md, swimming.md,
-  triathlon.md, multiday-events.md
+- cycling-endurance.md, cycling-workouts.md, cycling-race-execution.md,
+  cycling-injury-bike-fit.md, swimming.md, swim-workouts.md, triathlon.md,
+  multiday-events.md, return-to-run.md
 
 Match the file to the athlete's **sport**, not to the framework's origins. A
 question about knee pain on the bike is answered by `cycling-injury-bike-fit.md`,

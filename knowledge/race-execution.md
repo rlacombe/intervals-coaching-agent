@@ -1,8 +1,10 @@
 # Race-Day Execution
 
 > **Scope: trail ultrarunning.** Aid stations, cutoffs, crew, and the pacing
-> model below are ultra-specific. Bike-leg pacing by intensity factor is in
-> `triathlon.md`; pacing across consecutive days is in `multiday-events.md`. The
+> model below are ultra-specific. Standalone bike events — centuries, gran
+> fondos, brevets, time trials — are in `cycling-race-execution.md`; the
+> triathlon bike leg is in `triathlon.md`; consecutive days are in
+> `multiday-events.md`. The
 > ADAPT crisis framework and the psychology of pacing generalize to any long
 > event in any sport.
 

@@ -2,7 +2,7 @@
 
 > **Scope: running.** This is the running session library. The cycling
 > equivalent — sweet spot, over-unders, threshold, VO2max, micro-intervals — is
-> `cycling-workouts.md`. Swim set construction is in `swimming.md`. The
+> `cycling-workouts.md`. Swim set construction is in `swim-workouts.md`. The
 > periodization argument at the end (Koop's intensity-first versus Johnston's
 > base-first) applies to any sport.
 

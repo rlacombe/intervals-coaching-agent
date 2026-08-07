@@ -139,6 +139,11 @@ Standard guardrails apply: increase weekly load by no more than ~10%, step back 
 ### Step 5: Watch the grey zone
 Audit actual time-in-zone rather than intended time-in-zone. The most common finding in an athlete who has plateaued is that the easy rides are not easy.
 
+## See Also
+- `cycling-workouts.md` — the session library that implements these zones
+- `cycling-race-execution.md` — pacing by intensity factor on event day
+- `cycling-injury-bike-fit.md` — when the position, not the load, is the problem
+
 ## Sources & Further Reading
 
 ### Books

@@ -227,22 +227,25 @@ and a threshold test from running are not automatically right on a bike.
 | `age-gender.md`            | all       | Masters athletes, female physiology, menstrual cycle, menopause     |
 | `cycling-endurance.md`     | bike      | Power zones, FTP, durability, cadence, climbing, indoor vs outdoor  |
 | `cycling-injury-bike-fit.md` | bike    | Position-driven injury, symptom-to-fit map, saddle/cleat/crank, numbness rules, bone density |
+| `cycling-race-execution.md` | bike     | Pacing by intensity factor and duration, kJ as calories, drafting, brevet time budgets, mechanicals |
 | `cycling-workouts.md`      | bike      | Bike session library — sweet spot, over-unders, threshold, VO2max, micro-intervals, progression |
 | `data-interpretation.md`   | all       | Single data point vs trend, when to flag, consecutive-days framework |
 | `downhill-training.md`     | run       | Eccentric loading, quad durability, repeated bout effect, technique |
 | `heat-altitude.md`         | all       | Heat acclimation protocols, altitude zones, sauna protocols         |
-| `injury-prevention.md`     | run       | Red flags, volume ramp limits, return-to-run, prehab. Impact-injury model — bike is `cycling-injury-bike-fit.md` |
+| `injury-prevention.md`     | run       | Red flags, volume ramp limits, prehab. Impact-injury model — bike is `cycling-injury-bike-fit.md`, coming back is `return-to-run.md` |
 | `long-runs.md`             | run       | Time-on-feet targets, HR decoupling, back-to-backs, fueling        |
 | `mental-performance.md`    | all       | Association/dissociation, ADAPT framework, willpower, pre-race     |
 | `multiday-events.md`       | all       | Consecutive-day fatigue, overnight glycogen, contact points, day-1 pacing |
 | `muscular-endurance.md`    | run, bike | ME progression, weighted carries, gym vs trail ME debate            |
 | `nutrition.md`             | all       | Cal/hr, carb/hr, sodium, Bullseye plan, gut training, RED-S. Rates are ultra-run-derived; see the by-discipline section |
 | `periodization.md`         | all       | Phase structure, block design, Johnston vs Koop vs Magness models   |
-| `race-execution.md`        | run       | Ultra pacing, aid stations, cutoff management, ADAPT framework. Bike-leg pacing is in `triathlon.md` |
+| `race-execution.md`        | run       | Ultra pacing, aid stations, cutoff management, ADAPT framework. Bike events are `cycling-race-execution.md` |
 | `recovery-overtraining.md` | all       | FOR/NFOR/OTS stages, HRV monitoring, recovery protocols            |
+| `return-to-run.md`         | run       | Criteria-based return, entry gates, 24-hour rule, walk/run progression, tissue timelines |
 | `sleep.md`                 | all       | Sleep architecture, GH release, sleep hygiene, training adjustments |
 | `strength-training.md`     | all       | Gym programming, phase-specific strength, injury prevention         |
-| `swimming.md`              | swim      | Technique-limited sport, CSS testing, open water, wetsuits, drafting |
+| `swim-workouts.md`         | swim      | Set construction and notation, send-offs, CSS sets, drills, equipment, open-water sets |
+| `swimming.md`              | swim      | Technique-limited sport, CSS testing, open water, wetsuits, drafting, swimmer's shoulder |
 | `taper.md`                 | all       | Volume reduction, sharpening, taper tantrums, race-week protocols   |
 | `triathlon.md`             | tri       | Three-sport periodization, bricks, transitions, distance-specific pacing |
 | `volume-progression.md`    | all       | 10% rule, build:recovery ratios, peak volume targets by distance    |

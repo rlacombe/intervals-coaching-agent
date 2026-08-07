@@ -24,6 +24,9 @@ Worked example: 400 m in 6:40 (400 s), 200 m in 3:10 (190 s) → (400−200)/(40
 
 Retest every 8–12 weeks. CSS drifts with technique change far more than with fitness change, which is itself diagnostic: a large CSS improvement without a training-volume increase means the technical work is working.
 
+Set construction, notation, and the session library built on these zones are in
+`swim-workouts.md`.
+
 ### Zones by CSS
 | Zone | % of CSS pace | Purpose |
 |---|---|---|

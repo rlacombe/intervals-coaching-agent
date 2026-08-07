@@ -11,7 +11,7 @@ user-invocable: true
    |---|---|
    | Run | `workout-types.md`; `long-runs.md` for long runs; `aerobic-base.md` for intervals |
    | Bike | `cycling-workouts.md` for what the session was meant to do; `cycling-endurance.md`; `multiday-events.md` if part of consecutive days |
-   | Swim | `swimming.md` |
+   | Swim | `swim-workouts.md` for what the set was meant to do; `swimming.md` |
    | Triathlon / brick | `triathlon.md` |
 2. Fetch data using MCP tools (call them directly, in parallel where possible):
    - Activities endpoint for the last 3 days (to find the most recent)

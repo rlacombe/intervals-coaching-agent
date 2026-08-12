@@ -1,5 +1,10 @@
 # Data Interpretation: Single Data Points vs. Trends
 
+> **Scope: all sports.** The framework — one point is noise, two or three is a
+> signal — does not change by discipline. The thresholds below are given in heart
+> rate and pace because those are the running metrics; power and critical swim
+> speed equivalents are in the drift section.
+
 ## Summary
 
 Training data is inherently noisy. The companion's job is calm pattern recognition: one bad data point is noise, a pattern of two or three is a signal worth naming. This file provides domain-specific thresholds and a decision framework for when to mention something vs. when to wait and watch.
@@ -38,6 +43,20 @@ Some readings are significant on their own — don't wait for a trend:
 - **Noise:** One run where pace feels harder than usual at a given HR. Weather, sleep, fueling, terrain, and time of day all affect this.
 - **Signal:** HR consistently elevated 5+ bpm above baseline for the same effort across 3+ runs in a 7-day window. Or: pace declining at the same HR across 3+ comparable sessions.
 - **Source:** `sleep.md` (RHR baseline); `aerobic-base.md` for HR:pace relationship.
+
+**By discipline.** The drift principle is universal; the metric pair changes.
+
+| Sport | What drifts | Noise | Signal |
+|---|---|---|---|
+| Run | Heart rate against pace | One run that felt harder than the pace suggests | HR 5+ bpm above baseline at matched pace across 3+ runs in 7 days |
+| Bike | Heart rate against **power** — decoupling between the first and second half of a steady ride (Intervals.icu reports this directly) | A single ride decoupling above 5%, especially in heat or after poor sleep | Decoupling rising across 3+ comparable rides, or falling power at matched heart rate |
+| Swim | Pace against effort, or a **critical swim speed** retest | One slow set | Pace at a given perceived effort slipping across sessions, or a CSS retest that is slower without a change in volume |
+
+Two cautions. On the bike, **heart rate alone says almost nothing** — power is the
+input and heart rate is the response, so a low heart rate at low power is not a
+finding. Always read the pair. In the water, a CSS change tracks technique more
+closely than fitness, so a slower retest is as likely to be a stroke that has
+drifted as a body that is tired.
 
 ### HRV
 

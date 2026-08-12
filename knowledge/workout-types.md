@@ -1,5 +1,11 @@
 # Workout Types & Intensity
 
+> **Scope: running.** This is the running session library. The cycling
+> equivalent — sweet spot, over-unders, threshold, VO2max, micro-intervals — is
+> `cycling-workouts.md`. Swim set construction is in `swim-workouts.md`. The
+> periodization argument at the end (Koop's intensity-first versus Johnston's
+> base-first) applies to any sport.
+
 ## Summary
 The four primary ultrarunning coaches use different naming conventions and intensity scales, but their workout toolkits overlap substantially. Understanding how CTS workout types map onto Johnston's zone-based sessions and Magness's pace-based classifications is essential for translating between frameworks and prescribing the right session for the athlete's current training phase. The Roches (David Roche and Dr. Megan Roche) add a distinctive emphasis on strides as the foundational speed tool, arguing that running economy -- not just metabolic fitness -- is the primary limiter for most runners. The deepest disagreement is in periodization order: Koop starts with high intensity and works toward specificity, while Johnston builds base first and layers intensity on top.
 

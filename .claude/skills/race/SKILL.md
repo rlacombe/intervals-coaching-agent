@@ -7,14 +7,42 @@ user-invocable: true
 
 Builds a comprehensive race-day plan for the athlete's target race. The user may specify a race or default to the one in their athlete profile.
 
+## Step 0: Establish the event type
+
+The shape of the plan depends entirely on this. Determine which of these it is
+before reading anything:
+
+| Event | What dominates the plan |
+|---|---|
+| Single-discipline race (run, ride, swim) | Pacing, fuelling, terrain |
+| Triathlon | Bike Intensity Factor, transitions, the run off the bike |
+| Multi-day / stage event | Day-one restraint, overnight fuelling, contact points |
+| Supported vs self-supported | Load, resupply, and sleep quality change everything |
+
 ## Step 1: Read knowledge base
 
-Read these coaching files for expert protocols:
+Always read:
 - `knowledge/race-execution.md` — pacing, ADAPT framework, aid stations
 - `knowledge/taper.md` — taper check, sharpening
 - `knowledge/nutrition.md` — cal/hr, carb/hr, fluid targets, Bullseye plan
 - `knowledge/heat-altitude.md` — environmental preparation
 - `knowledge/mental-performance.md` — associative/dissociative strategies, crisis protocols
+
+Then, for the event type:
+- **Triathlon** — `knowledge/triathlon.md`. The single most consequential number
+  is the bike Intensity Factor: 0.78–0.85 for a 70.3, 0.65–0.75 for an Ironman.
+  Above those, the run does not degrade proportionally — it can collapse
+  entirely. Nearly every catastrophic long-course marathon split is a bike
+  pacing error, not a run fitness deficit. Also plan T1 and T2 explicitly;
+  they are free time and are routinely unpractised.
+- **Cycling event** — `knowledge/cycling-endurance.md` for power-based pacing.
+  Pace by Intensity Factor and normalized power, not by heart rate or feel.
+- **Swim event** — `knowledge/swimming.md` for the start surge, sighting
+  cadence, drafting, and wetsuit decisions.
+- **Multi-day** — `knowledge/multiday-events.md`. Day one is the day athletes
+  get wrong and day three is where they pay. Plan an explicit effort ceiling
+  for day one, the overnight carbohydrate target (8–10 g/kg/day), a target
+  bedtime worked backwards from the finish, and the contact-point plan.
 
 ## Step 2: Gather data
 

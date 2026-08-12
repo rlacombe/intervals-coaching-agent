@@ -11,7 +11,9 @@ Goes deeper than `/today`'s daily snapshot. Analyzes multi-week trends to flag o
 
 Read these coaching files for detection criteria and thresholds:
 - `knowledge/recovery-overtraining.md` — FOR/NFOR/OTS stages, detection methods, warning signs
-- `knowledge/injury-prevention.md` — red flags, volume ramp limits, return protocols
+- `knowledge/injury-prevention.md` — red flags, volume ramp limits, return protocols (running; impact-injury model)
+- `knowledge/cycling-injury-bike-fit.md` — for a cycling-dominant athlete: positional causes, numbness rules, bone density
+- `knowledge/return-to-run.md` — if the athlete is coming back from injury or layoff: entry criteria and the 24-hour rule
 - `knowledge/volume-progression.md` — 10% rule, build:recovery ratios, CTL ramp rates
 - `knowledge/age-gender.md` — age/gender-specific recovery considerations
 
@@ -27,10 +29,19 @@ Read `athlete/profile.md` for injury history, age, known weaknesses, and cached 
 ## Step 3: Analyze
 
 ### Volume Trends
-- Weekly mileage progression over 4 weeks — flag increases >10%/week
+Analyse **per discipline and in total** — the two can tell different stories,
+and the dangerous case is the one only visible in the total.
+
+- Weekly volume progression over 4 weeks, per discipline — flag any sport increasing >10%/week
+- Total training load progression over the same 4 weeks — flag >10%/week even when no individual sport breaches it. An athlete can hold running, cycling, and swimming each under 10% and still ramp their overall load by 30%
+- Acute:chronic ratio — flag a single session generating more than ~2× current fitness. That is a race, not a training day, and it warrants race-equivalent recovery
 - CTL ramp rate — flag if >5 points/week sustained
 - Are recovery weeks happening? Check for step-back every 3-4 weeks
 - Build:recovery ratio — is it 3:1 or 2:1? Should it be?
+- **Impact load specifically.** Running and court sports carry far more injury
+  risk per unit of training stress than cycling or swimming. A week where total
+  load held steady but running doubled is a higher-risk week than the load
+  number shows. Weight the assessment accordingly.
 
 ### Wellness Trends
 - HRV trend: declining over 7+ days = concern
@@ -47,7 +58,18 @@ Using the FOR → NFOR → OTS framework from `knowledge/recovery-overtraining.m
 ### Injury Risk
 - Volume spike detection (acute:chronic ratio)
 - Any reported soreness or pain patterns
-- Shoe mileage if tracked
+- **Equipment and contact points, by discipline:**
+  - Running — shoe mileage if tracked
+  - Cycling — saddle, hands, and feet on long or consecutive days; bike fit if
+    knee or back pain appears; gearing if the athlete has a knee history, since
+    low-cadence grinding is the aggravating pattern
+  - Swimming — shoulder load, which rises with volume and with paddle use
+- **Low heart rate does not mean low joint load.** A session can be
+  cardiovascularly trivial and mechanically significant — pivoting, jumping,
+  and court sports all qualify. Assess the mechanical demand separately from
+  the load number, particularly for an athlete with a joint history.
+- Check `athlete/notes.md` for any recorded intensity baseline for the
+  athlete's non-endurance activities before assuming what they cost.
 
 ## Step 4: Display
 

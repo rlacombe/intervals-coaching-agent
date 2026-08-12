@@ -1,5 +1,12 @@
 # Nutrition & Fueling
 
+> **Scope: principles universal, rates ultrarunning-derived.** Daily nutrition,
+> gut training, sodium, energy availability, and RED-S apply to every sport
+> unchanged. The in-session carbohydrate and fluid targets below come from
+> ultrarunning and do **not** transfer directly to the bike or the water — see
+> "Fuelling by Discipline" before quoting a gram-per-hour figure at a cyclist or
+> a triathlete.
+
 ## Summary
 
 Nutrition is a trainable skill and one of the most impactful variables in ultrarunning
@@ -420,6 +427,50 @@ wrong guarantees them — GI distress is the leading cause of race abandonment.
    caloric deficit are a "ticking time bomb" — the fuse gets shorter each time. Redirect
    to the Roches' mantra: "eat enough, always; eat too much, sometimes; eat too little,
    never." If weight management is medically indicated, defer to a physician.
+
+## Fuelling by Discipline
+
+Everything above is derived from ultrarunning. The principles hold across sports;
+the **rates do not**. The difference is mechanical, not metabolic: running
+combines vertical impact, torso jostling, and reduced blood flow to the gut, and
+those are what cap carbohydrate absorption in practice. Remove them and the same
+athlete tolerates far more.
+
+| | Run | Bike | Swim |
+|---|---|---|---|
+| Typical carbohydrate ceiling | 60–90 g/h, well tolerated; 90–120 g/h only with deliberate gut training | 90–120 g/h routinely; the professional peloton now works at the top of that band and above | Effectively zero in-session |
+| Limiting factor | Gut tolerance and mechanical jostling | Absorption rate, and willingness to keep eating | Access — you cannot eat while swimming |
+| Fluid carrying capacity | Low — flasks, vest, aid stations | High — two bottles plus frame storage | None |
+| Practical form | Gels, chews, real food at aid stations | Bottles with mix, bars, gels; solid food early, liquid late | Pre-load before; refuel immediately after |
+
+**Rules that follow from the table**
+
+- **A gram-per-hour figure is not portable between sports.** Quoting an ultra
+  number at a cyclist under-fuels them by a third; quoting a cycling number at a
+  runner is how a race ends in a portaloo.
+- **Glucose–fructose blends are what make the high rates possible.** A single
+  transporter saturates around 60 g/h; the roughly 1:0.8 glucose-to-fructose
+  ratio used in modern products is what allows 90–120 g/h to be absorbed rather
+  than merely swallowed. This matters more on the bike, because that is where
+  those rates are attainable.
+- **Anything under about 75 minutes needs no in-session fuel in any sport**,
+  carbohydrate mouth rinse aside.
+- **Swimming is fuelled either side, not during.** For a long open-water swim,
+  arrive topped up and treat the swim as a fasted block. A wetsuit-legal race
+  swim of an hour needs nothing beyond what was eaten beforehand.
+- **In triathlon, front-load the carbohydrate on the bike.** It is the only leg
+  where the gut reliably works, and the run is where the deficit shows up.
+  Under-fuelling the bike to "save the stomach" is the most common and most
+  expensive fuelling error in long-course racing. See `triathlon.md`.
+- **Gut training is discipline-specific.** Training the gut on the bike does not
+  fully prepare it for running at the same rate. Rehearse at race rate in the
+  discipline you will race in — and in triathlon, rehearse the run at the rate
+  you will actually be carrying out of T2.
+- **Sodium scales with sweat rate, not with sport.** The one practical
+  difference is that a cyclist's sweat evaporates in the airflow and is easy to
+  underestimate. See `heat-altitude.md`.
+- **Multi-day events invert the priority** — overnight restoration matters more
+  than in-session rate. See `multiday-events.md`.
 
 ## Sources & Further Reading
 

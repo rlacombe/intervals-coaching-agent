@@ -7,6 +7,8 @@ user-invocable: true
 
 The user will provide a reason (e.g., "feeling tired", "knee is sore", "need to swap Thursday and Friday").
 
+Calendar modification requires Intervals.icu. If it is not configured, provide a proposed plan in text and state that the athlete must add it to their own calendar.
+
 0. Read relevant knowledge base files based on the reason:
    - Fatigue/soreness: `knowledge/recovery-overtraining.md`, `knowledge/injury-prevention.md`
    - Schedule change: `knowledge/periodization.md` (preserve weekly structure principles)

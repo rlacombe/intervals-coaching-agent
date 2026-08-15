@@ -7,6 +7,15 @@
         "INTERVALS_API_KEY": "${INTERVALS_API_KEY}",
         "INTERVALS_ATHLETE_ID": "${INTERVALS_ATHLETE_ID}"
       }
+    },
+    "strava": {
+      "command": "node",
+      "args": ["src/strava.mjs"],
+      "env": {
+        "STRAVA_CLIENT_ID": "${STRAVA_CLIENT_ID}",
+        "STRAVA_CLIENT_SECRET": "${STRAVA_CLIENT_SECRET}",
+        "STRAVA_REFRESH_TOKEN": "${STRAVA_REFRESH_TOKEN}"
+      }
     }
   }
 }

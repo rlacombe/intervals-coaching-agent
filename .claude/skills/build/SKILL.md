@@ -7,6 +7,8 @@ user-invocable: true
 
 The user will describe what they need (e.g., "plan next week", "build a 4-week block", "create a long run for Saturday", "I need a tempo workout tomorrow").
 
+Calendar creation requires Intervals.icu. With Strava alone, build the plan and present portable workout text, but do not claim it was scheduled.
+
 ## Step 1: Read knowledge base
 
 Read these coaching files to inform workout design:

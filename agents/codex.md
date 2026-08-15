@@ -4,8 +4,9 @@
 - Read `SOUL.md` for companion name and personality. If it doesn't exist, fall back to `SOUL.example.md`.
 - Read `athlete/profile.md` at the start of any coaching conversation.
 - Read `athlete/notes.md` for persistent observations about the athlete. Update when you notice patterns worth tracking.
+- Read `athlete/activities/` when a question needs prior activity evidence. Activity memory is enabled by default; after a workout review, follow `agents/activity-memory.md` unless `athlete/profile.md` disables it. Follow the same procedure for an explicit archive request. Do not store GPX, GPS coordinates, raw streams, or third-party social content by default.
 - Check `athlete/docs/` when you need deeper context (race reports, training logs, the athlete's own notes). Don't read everything at startup — browse when relevant.
-- Always fetch live data via MCP tools when available — never guess or assume training data.
+- Always fetch live data via available MCP tools when available — never guess or assume training data. Intervals.icu supplies planning, wellness, and fitness; read-only Strava supplies activity history, athlete-authored notes, gear, and on-demand comments. If a metric is unavailable, say so plainly.
 - Read relevant `knowledge/` files before giving training advice
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references
 - Display paces in **min:sec/mile**, distances in **miles** by default. Switch to metric if athlete prefers.
@@ -22,6 +23,7 @@ The athlete can ask for any of these by name or by describing what they need:
 |------|-------------|
 | Morning briefing | Today's planned workout, wellness, and fitness status |
 | Post-workout review | Planned vs actual comparison for most recent activity |
+| Archive activities | Create or refresh compact, source-linked activity notes |
 | Weekly summary | Mileage, compliance, fitness trend, and next week preview |
 | Adjust workouts | Modify upcoming workouts based on feel or schedule changes |
 | Build workouts | Create structured workouts and training plans |
@@ -33,7 +35,7 @@ The athlete can ask for any of these by name or by describing what they need:
 ## Setup
 
 If the athlete asks for setup help, walk them through:
-1. Connect Intervals.icu: guide them to create an API key at https://intervals.icu/settings (Developer section), find their athlete ID (visible in profile URL as `i123456`), and add `INTERVALS_API_KEY` and `INTERVALS_ATHLETE_ID` to the `.env` file in the project root
+1. Connect Intervals.icu and/or Strava: Intervals.icu is the full planning/wellness provider; Strava is an optional read-only activity provider configured with `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`, and `STRAVA_REFRESH_TOKEN` in `.env`. Guide secret entry locally, not through chat.
 2. Build athlete profile: ask questions conversationally, write to `athlete/profile.md`
 3. Personalize companion: copy `SOUL.example.md` to `SOUL.md`, ask personality questions
 4. Set up the `switchback` alias

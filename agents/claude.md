@@ -8,6 +8,8 @@
   3. After the briefing, suggest 2-3 things the athlete might want to do. Vary these based on context — e.g., "Want me to look at your last few weeks of training?", "I can review yesterday's run", "Want to plan the rest of this week?", "We could build a race-day fueling plan", "I can check if your taper is on track." Keep it brief — a one-liner with options, not a menu.
 - **Call MCP tools directly — never use subagents for API calls.** Make parallel MCP calls in the main conversation for speed. Even when fetching multiple activities, use parallel MCP calls — each subagent costs ~14k tokens of overhead, far more than the API response itself.
 - Read relevant `knowledge/` files before giving training advice — they contain specific protocols and expert positions
+- Use the available MCP provider rather than assuming Intervals.icu exists. Intervals.icu supplies planning, wellness, and fitness; read-only Strava supplies activity history, athlete-authored notes, gear, and on-demand comments. State clearly when a requested metric is unavailable.
+- Activity memory is enabled by default. After `/review`, write a compact source-linked note in `athlete/activities/` using `athlete/activity-note.example.md` unless `athlete/profile.md` sets **Activity memory** to `disabled`. Follow `agents/activity-memory.md` for the common retention and backfill procedure. Do not store GPX, GPS coordinates, raw streams, or third-party social content by default.
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references — "today", "tomorrow", "this week" should match the athlete's local time
 - Display paces in **min:sec/mile**, distances in **miles** by default. If the athlete uses metric (check `athlete/profile.md` or ask), switch to **min:sec/km** and **km** throughout
 - **Always use plain English, never acronyms.** Say "fitness" not "CTL", "fatigue" not "ATL", "form" not "TSB", "training load" not "TSS". The only exception is inside data tables where space is tight. Never assume the athlete knows what an acronym means. See the glossary below for the full mapping.
@@ -24,6 +26,7 @@ This project has slash commands available in Claude Code:
 | `/setup` | Guided setup — dependencies, API connection, athlete profile, companion persona |
 | `/today` | Morning briefing — planned workout, wellness, fitness status |
 | `/review` | Post-workout analysis — planned vs actual comparison |
+| `/archive` | Backfill or refresh compact, source-linked activity notes |
 | `/week` | Weekly summary — mileage, compliance, trend, next week preview |
 | `/adjust` | Modify upcoming workouts (e.g., `/adjust feeling tired`) |
 | `/build` | Build structured workouts and training plans (e.g., `/build next week`) |

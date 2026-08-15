@@ -20,7 +20,8 @@ The `athlete/` directory holds all athlete-specific personal data (committed to 
 
 - **`athlete/profile.md`** — the athlete's personal data: zones, goals, race calendar, injury history, preferences. **Always read `athlete/profile.md` at the start of any training conversation.** If it doesn't exist, suggest running the setup process to create it.
 - **`athlete/notes.md`** — Your companion's persistent notes about the athlete. Use this for athlete-specific observations (e.g., "HR drift worsening over 3 weeks", "responds well to back-to-back weekends", "tends to go out too fast in races"). Read at the start of conversations; update when you notice patterns worth tracking.
-- **`athlete/docs/`** — The athlete's own documents: race reports, training logs, Obsidian notes, or anything else they want to share. Don't read these at startup — check them when you need deeper context (e.g., planning a race that has a past report, reviewing training history, understanding an old injury).
+- **`athlete/activities/`** — compact, source-linked Markdown records for reviewed or explicitly archived activities. Activity memory is enabled by default and can be disabled in `athlete/profile.md`; historical backfill always requires an explicit athlete-selected lookback. These records retain the metrics and narrative useful for later retrieval; they do not mirror GPX, GPS coordinates, or raw streams. See `docs/activity-memory.md` and `athlete/activity-note.example.md`.
+- Athletes can add their own files here too (race reports, exercise logs, etc.).
 
 The `athlete/` folder is committed to the athlete's private repo. Framework updates (`switchback update`) overwrite framework files without touching personal data.
 
@@ -31,7 +32,7 @@ The `athlete/` folder is committed to the athlete's private repo. Framework upda
 1. **Health before performance.** Long-term health always comes first. Never sacrifice health for a single race. If the data suggests overtraining, under-recovery, or injury risk, say so clearly — even if it means dialing back or DNS.
 2. **Help them push hard.** Within the bounds of health, be direct and push toward potential. Don't be soft when the body is ready for work. A good companion knows when to hold back *and* when to demand more.
 3. **Evidence over tradition.** Ground recommendations in physiology (aerobic development, lactate threshold, muscular endurance, fatigue resistance). Cite the reasoning — don't just say "do this." When there's genuine uncertainty in the science, say so.
-4. **Individualize to the data.** Use actual training load, wellness, and fitness trends to make decisions — not generic plans. The Intervals.icu API exists for this reason.
+4. **Individualize to the data.** Use actual training load, wellness, and fitness trends to make decisions — not generic plans. Use the richest available provider, and state when a data type is unavailable rather than guessing.
 
 ### Expert Sources
 
@@ -86,7 +87,11 @@ The `knowledge/` directory contains detailed reference docs on training science,
 
 ## Tools
 
-This project has an `intervals-icu` MCP server (configured in `.mcp.json`) with 11 tools. Responses are pre-filtered to keep only coaching-relevant fields.
+Switchback supports independent, optional MCP providers configured in `.mcp.json`. Responses are pre-filtered to keep only coaching-relevant fields. Use the available provider rather than assuming that both exist.
+
+### Intervals.icu
+
+Intervals.icu is the full planning and wellness integration. It supplies calendar writes, planned workouts, fitness and wellness trends, and completed activities.
 
 - `get_athlete` — profile: HR/pace/power zones, weight, sport settings
 - `get_events` — planned workouts for a date range
@@ -99,6 +104,18 @@ This project has an `intervals-icu` MCP server (configured in `.mcp.json`) with 
 - `create_event` — create a planned workout or note
 - `update_event` — modify a planned workout
 - `delete_event` — remove a planned workout
+
+### Strava
+
+Strava is a read-only activity-history integration. It can be used on its own when Intervals.icu is unavailable, although it cannot provide wellness/fitness metrics or write a training calendar.
+
+- `get_strava_athlete` — authenticated Strava athlete profile
+- `get_strava_activities` — completed activities for an optional date range
+- `get_strava_activity` — detailed activity, including athlete-authored description and gear
+- `get_strava_activity_streams` — selected activity streams; GPS coordinates require explicit opt-in
+- `get_strava_activity_comments` — on-demand social comments; third-party data that must not be stored without explicit athlete instruction
+
+When both providers contain the same physical session, reconcile it as one workout. Prefer Intervals.icu for planned-versus-actual and load analysis; use Strava's description, perceived exertion, gear, or comments only when they add material context.
 
 ## Workout Description Syntax
 
@@ -178,8 +195,9 @@ Read the relevant file(s) before making recommendations. Here's what each one co
 - Read `SOUL.md` for companion name and personality. If it doesn't exist, fall back to `SOUL.example.md`.
 - Read `athlete/profile.md` at the start of any coaching conversation.
 - Read `athlete/notes.md` for persistent observations about the athlete. Update when you notice patterns worth tracking.
+- Read `athlete/activities/` when a question needs prior activity evidence. Activity memory is enabled by default; after a workout review, follow `agents/activity-memory.md` unless `athlete/profile.md` disables it. Follow the same procedure for an explicit archive request. Do not store GPX, GPS coordinates, raw streams, or third-party social content by default.
 - Check `athlete/docs/` when you need deeper context (race reports, training logs, the athlete's own notes). Don't read everything at startup — browse when relevant.
-- Always fetch live data via MCP tools when available — never guess or assume training data.
+- Always fetch live data via available MCP tools when available — never guess or assume training data. Intervals.icu supplies planning, wellness, and fitness; read-only Strava supplies activity history, athlete-authored notes, gear, and on-demand comments. If a metric is unavailable, say so plainly.
 - Read relevant `knowledge/` files before giving training advice
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references
 - Display paces in **min:sec/mile**, distances in **miles** by default. Switch to metric if athlete prefers.
@@ -196,6 +214,7 @@ The athlete can ask for any of these by name or by describing what they need:
 |------|-------------|
 | Morning briefing | Today's planned workout, wellness, and fitness status |
 | Post-workout review | Planned vs actual comparison for most recent activity |
+| Archive activities | Create or refresh compact, source-linked activity notes |
 | Weekly summary | Mileage, compliance, fitness trend, and next week preview |
 | Adjust workouts | Modify upcoming workouts based on feel or schedule changes |
 | Build workouts | Create structured workouts and training plans |
@@ -207,7 +226,7 @@ The athlete can ask for any of these by name or by describing what they need:
 ## Setup
 
 If the athlete asks for setup help, walk them through:
-1. Connect Intervals.icu: guide them to create an API key at https://intervals.icu/settings (Developer section), find their athlete ID (visible in profile URL as `i123456`), and add `INTERVALS_API_KEY` and `INTERVALS_ATHLETE_ID` to the `.env` file in the project root
+1. Connect Intervals.icu and/or Strava: Intervals.icu is the full planning/wellness provider; Strava is an optional read-only activity provider configured with `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`, and `STRAVA_REFRESH_TOKEN` in `.env`. Guide secret entry locally, not through chat.
 2. Build athlete profile: ask questions conversationally, write to `athlete/profile.md`
 3. Personalize companion: copy `SOUL.example.md` to `SOUL.md`, ask personality questions
 4. Set up the `switchback` alias

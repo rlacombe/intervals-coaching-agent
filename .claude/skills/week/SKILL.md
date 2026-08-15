@@ -6,6 +6,7 @@ user-invocable: true
 # /week — Weekly Summary
 
 1. Determine the current week (Monday–Sunday). Read `knowledge/volume-progression.md` for safe ramp rates and recovery week guidelines, and `knowledge/periodization.md` for training phase context.
+   - If only Strava is configured, summarize completed-activity volume and recent activity patterns. State that plan compliance, wellness, and fitness metrics require Intervals.icu.
 2. Fetch data using MCP tools (call them directly, in parallel where possible):
    - Activities endpoint for this week
    - Events endpoint for this week (planned)

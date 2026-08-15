@@ -21,15 +21,20 @@ try {
 
 const API_KEY = process.env.INTERVALS_API_KEY;
 const ATHLETE_ID = process.env.INTERVALS_ATHLETE_ID;
-if (!API_KEY || !ATHLETE_ID) { process.stderr.write("Missing INTERVALS_API_KEY or INTERVALS_ATHLETE_ID\n"); process.exit(1); }
 
 const BASE = "https://intervals.icu/api/v1";
-const AUTH = "Basic " + Buffer.from(`API_KEY:${API_KEY}`).toString("base64");
+function requireConfiguration() {
+  if (!API_KEY || !ATHLETE_ID) {
+    throw new Error("Intervals.icu is not configured. Set INTERVALS_API_KEY and INTERVALS_ATHLETE_ID in .env.");
+  }
+}
 
 // --- API helpers ---
 
 async function api(path, opts = {}) {
-  const r = await fetch(`${BASE}${path}`, { ...opts, headers: { Authorization: AUTH, "Content-Type": "application/json", ...opts.headers } });
+  requireConfiguration();
+  const auth = "Basic " + Buffer.from(`API_KEY:${API_KEY}`).toString("base64");
+  const r = await fetch(`${BASE}${path}`, { ...opts, headers: { Authorization: auth, "Content-Type": "application/json", ...opts.headers } });
   if (!r.ok) throw new Error(`API ${r.status}: ${await r.text()}`);
   return r.status === 204 ? null : r.json();
 }

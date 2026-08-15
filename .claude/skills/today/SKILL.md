@@ -6,6 +6,7 @@ user-invocable: true
 # /today — Morning Briefing
 
 1. Get today's date. Read `knowledge/recovery-overtraining.md` for overtraining warning signs and `knowledge/workout-types.md` for workout execution guidance.
+   - If Intervals.icu is unavailable, use recent Strava activity history and the athlete profile for a limited briefing. State that planned workouts, wellness, fitness, and calendar data are unavailable rather than fabricating them.
 2. Fetch data using MCP tools (call them directly, in parallel where possible):
    - Events endpoint for the next 14 days (oldest=today, newest=today+13) — today's workout plus the full training block ahead for context
    - Wellness endpoint for the last 3 days (oldest=today-2, newest=today) — trend context, not just a snapshot

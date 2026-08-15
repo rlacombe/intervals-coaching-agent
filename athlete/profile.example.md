@@ -13,6 +13,8 @@
 - **Training week:** [typical structure, days available, trail access]
 - **Cross-training:** [other sports — bike, swim, ski, etc.]
 - **Goals:** [short-term and long-term]
+- **Activity memory:** enabled (default; set to `disabled` to stop automatic archival after reviews)
+- **Activity-memory backfill:** none (optional; record the selected lookback after archival)
 
 ## Zones
 

@@ -7,6 +7,8 @@ user-invocable: true
 
 Goes deeper than `/today`'s daily snapshot. Analyzes multi-week trends to flag overtraining risk, volume ramp issues, recovery adequacy, and injury warning signs.
 
+If only Strava is configured, limit the audit to completed-activity volume, frequency, intensity, and athlete-reported descriptions. Do not claim HRV, sleep, CTL/ATL/TSB, or planned-workout compliance without Intervals.icu data.
+
 ## Step 1: Read knowledge base
 
 Read these coaching files for detection criteria and thresholds:

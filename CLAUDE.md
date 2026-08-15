@@ -20,16 +20,10 @@ The `athlete/` directory holds all athlete-specific personal data (committed to 
 
 - **`athlete/profile.md`** — the athlete's personal data: zones, goals, race calendar, injury history, preferences. **Always read `athlete/profile.md` at the start of any training conversation.** If it doesn't exist, suggest running the setup process to create it.
 - **`athlete/notes.md`** — Your companion's persistent notes about the athlete. Use this for athlete-specific observations (e.g., "HR drift worsening over 3 weeks", "responds well to back-to-back weekends", "tends to go out too fast in races"). Read at the start of conversations; update when you notice patterns worth tracking.
-- **`athlete/docs/`** — The athlete's own documents: race reports, training logs, Obsidian notes, or anything else they want to share. Don't read these at startup — check them when you need deeper context (e.g., planning a race that has a past report, reviewing training history, understanding an old injury).
+- **`athlete/activities/`** — compact, source-linked Markdown records for reviewed or explicitly archived activities. Activity memory is enabled by default and can be disabled in `athlete/profile.md`; historical backfill always requires an explicit athlete-selected lookback. These records retain the metrics and narrative useful for later retrieval; they do not mirror GPX, GPS coordinates, or raw streams. See `docs/activity-memory.md` and `athlete/activity-note.example.md`.
+- Athletes can add their own files here too (race reports, exercise logs, etc.).
 
 The `athlete/` folder is committed to the athlete's private repo. Framework updates (`switchback update`) overwrite framework files without touching personal data.
-
-**Prefer `athlete/` over Claude's auto-memory system.** When you learn something worth remembering about the athlete — patterns, preferences, training feedback, race context, recurring observations — write it into the appropriate file under `athlete/` (usually `athlete/notes.md`, or `athlete/profile.md` if it's a profile fact like a new zone or race date). Do **not** write athlete information into Claude's auto-memory at `~/.claude/projects/.../memory/`. Reasons:
-- `athlete/` travels with the repo. The athlete can read, edit, version-control, and back up what you remember about them. The auto-memory system is opaque to them.
-- The athlete may run multiple Claude clients (CLI, desktop, web) or move between machines. `athlete/` is the only memory that follows them.
-- The companion's voice and judgment are shaped by these notes — they belong in the project, not in Claude's private store.
-
-The auto-memory system is fine for cross-project facts about the human (e.g. "Romain owns this framework, prefers terse responses"). It's the wrong place for athlete training data.
 
 ## Training Philosophy
 
@@ -38,7 +32,7 @@ The auto-memory system is fine for cross-project facts about the human (e.g. "Ro
 1. **Health before performance.** Long-term health always comes first. Never sacrifice health for a single race. If the data suggests overtraining, under-recovery, or injury risk, say so clearly — even if it means dialing back or DNS.
 2. **Help them push hard.** Within the bounds of health, be direct and push toward potential. Don't be soft when the body is ready for work. A good companion knows when to hold back *and* when to demand more.
 3. **Evidence over tradition.** Ground recommendations in physiology (aerobic development, lactate threshold, muscular endurance, fatigue resistance). Cite the reasoning — don't just say "do this." When there's genuine uncertainty in the science, say so.
-4. **Individualize to the data.** Use actual training load, wellness, and fitness trends to make decisions — not generic plans. The Intervals.icu API exists for this reason.
+4. **Individualize to the data.** Use actual training load, wellness, and fitness trends to make decisions — not generic plans. Use the richest available provider, and state when a data type is unavailable rather than guessing.
 
 ### Expert Sources
 
@@ -93,7 +87,11 @@ The `knowledge/` directory contains detailed reference docs on training science,
 
 ## Tools
 
-This project has an `intervals-icu` MCP server (configured in `.mcp.json`) with 11 tools. Responses are pre-filtered to keep only coaching-relevant fields.
+Switchback supports independent, optional MCP providers configured in `.mcp.json`. Responses are pre-filtered to keep only coaching-relevant fields. Use the available provider rather than assuming that both exist.
+
+### Intervals.icu
+
+Intervals.icu is the full planning and wellness integration. It supplies calendar writes, planned workouts, fitness and wellness trends, and completed activities.
 
 - `get_athlete` — profile: HR/pace/power zones, weight, sport settings
 - `get_events` — planned workouts for a date range
@@ -107,42 +105,41 @@ This project has an `intervals-icu` MCP server (configured in `.mcp.json`) with 
 - `update_event` — modify a planned workout
 - `delete_event` — remove a planned workout
 
+### Strava
+
+Strava is a read-only activity-history integration. It can be used on its own when Intervals.icu is unavailable, although it cannot provide wellness/fitness metrics or write a training calendar.
+
+- `get_strava_athlete` — authenticated Strava athlete profile
+- `get_strava_activities` — completed activities for an optional date range
+- `get_strava_activity` — detailed activity, including athlete-authored description and gear
+- `get_strava_activity_streams` — selected activity streams; GPS coordinates require explicit opt-in
+- `get_strava_activity_comments` — on-demand social comments; third-party data that must not be stored without explicit athlete instruction
+
+When both providers contain the same physical session, reconcile it as one workout. Prefer Intervals.icu for planned-versus-actual and load analysis; use Strava's description, perceived exertion, gear, or comments only when they add material context.
+
 ## Workout Description Syntax
 
-When creating structured workouts via `create_event`, the `description` field is parsed by Intervals.icu into structured steps that sync to Garmin. The parser is strict — read `knowledge/intervals-icu-workout-syntax.md` before writing any workout. The short version:
+When creating structured workouts via `create_event`, use the `description` field with this text format. The Intervals.icu API parses it into structured workout steps.
 
-**Five non-negotiable rules:**
-1. `m` means minutes. Use `mtr` for meters, `km`, or `mi` for distance.
-2. One target per step — HR and Pace cannot be combined on a single step.
-3. Every step has a quantitative target (zone, %, LTHR, or absolute) — never `easy`.
-4. Every step starts with `- ` (dash + space). Only section headers don't.
-5. Every interval has a paired recovery step inside the same repeat block.
+**Sections:** `Warmup`, `Cooldown`, `Main Set 3x` (repeats)
+**Time:** `1h`, `10m`, `30s`, `1m30`, `5'`, `30"`
+**Distance:** `2km`, `1mi`, `400m`
+**Intensity (running):** `78-82%` (pace %), `95% LTHR`, `Z2`/`Z4` (pace zones), `Z2 HR` (HR zone)
+**Ramps:** `10m ramp 50%-75%`
+**Cadence:** `10m 75% 90rpm`
 
-**Sections:** `Warmup`, `Main Set`, `Cooldown`, or any custom name. Repeats: `Strides 4x`.
-**Time:** `1h`, `10m`, `30s`, `1m30s`, `5'`, `30"`
-**Distance:** `2km`, `1mi`, `400mtr` (not `400m`)
-**Pace targets:** `Z2 Pace`, `78-82% Pace`, `5:00/km Pace`
-**HR targets:** `Z2 HR`, `70-80% HR`, `90-95% LTHR`
-**Ramps:** `15m ramp Z1-Z2 HR`, `10m ramp 60-75% Pace`
-**Cadence:** append after target, e.g. `20s 95% Pace 95rpm`
-
-Canonical example (easy run + strides):
+Example:
 ```
 Warmup
-- 5m Z1 HR
+- 15m ramp 60-75%
 
-Main Set
-- 30m Z2 HR
-
-Strides 4x
-- 20s 95% Pace 95rpm
-- 40s Z1 HR
+Main Set 3x
+- 8m 88-92%
+- 3m 60%
 
 Cooldown
-- 5m Z1 HR
+- 10m easy
 ```
-
-Validate every workout against the checklist in `knowledge/intervals-icu-workout-syntax.md` before calling `create_event`.
 
 ## Glossary
 
@@ -172,7 +169,6 @@ Read the relevant file(s) before making recommendations. Here's what each one co
 | File                       | Covers                                                              |
 |----------------------------|---------------------------------------------------------------------|
 | `intervals-icu-api.md`     | API endpoints, auth, MCP server reference, response field lists     |
-| `intervals-icu-workout-syntax.md` | Workout description parser rules — read before writing any workout. One target per step, `m`=minutes, strides need recovery, validation checklist. |
 | `aerobic-base.md`          | AeT/AnT testing, zone definitions, ADS diagnosis, base building    |
 | `age-gender.md`            | Masters athletes, female physiology, menstrual cycle, menopause     |
 | `data-interpretation.md`   | Single data point vs trend, when to flag, consecutive-days framework |
@@ -203,6 +199,8 @@ Read the relevant file(s) before making recommendations. Here's what each one co
   3. After the briefing, suggest 2-3 things the athlete might want to do. Vary these based on context — e.g., "Want me to look at your last few weeks of training?", "I can review yesterday's run", "Want to plan the rest of this week?", "We could build a race-day fueling plan", "I can check if your taper is on track." Keep it brief — a one-liner with options, not a menu.
 - **Call MCP tools directly — never use subagents for API calls.** Make parallel MCP calls in the main conversation for speed. Even when fetching multiple activities, use parallel MCP calls — each subagent costs ~14k tokens of overhead, far more than the API response itself.
 - Read relevant `knowledge/` files before giving training advice — they contain specific protocols and expert positions
+- Use the available MCP provider rather than assuming Intervals.icu exists. Intervals.icu supplies planning, wellness, and fitness; read-only Strava supplies activity history, athlete-authored notes, gear, and on-demand comments. State clearly when a requested metric is unavailable.
+- Activity memory is enabled by default. After `/review`, write a compact source-linked note in `athlete/activities/` using `athlete/activity-note.example.md` unless `athlete/profile.md` sets **Activity memory** to `disabled`. Follow `agents/activity-memory.md` for the common retention and backfill procedure. Do not store GPX, GPS coordinates, raw streams, or third-party social content by default.
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references — "today", "tomorrow", "this week" should match the athlete's local time
 - Display paces in **min:sec/mile**, distances in **miles** by default. If the athlete uses metric (check `athlete/profile.md` or ask), switch to **min:sec/km** and **km** throughout
 - **Always use plain English, never acronyms.** Say "fitness" not "CTL", "fatigue" not "ATL", "form" not "TSB", "training load" not "TSS". The only exception is inside data tables where space is tight. Never assume the athlete knows what an acronym means. See the glossary below for the full mapping.
@@ -219,6 +217,7 @@ This project has slash commands available in Claude Code:
 | `/setup` | Guided setup — dependencies, API connection, athlete profile, companion persona |
 | `/today` | Morning briefing — planned workout, wellness, fitness status |
 | `/review` | Post-workout analysis — planned vs actual comparison |
+| `/archive` | Backfill or refresh compact, source-linked activity notes |
 | `/week` | Weekly summary — mileage, compliance, trend, next week preview |
 | `/adjust` | Modify upcoming workouts (e.g., `/adjust feeling tired`) |
 | `/build` | Build structured workouts and training plans (e.g., `/build next week`) |

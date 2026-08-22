@@ -61,6 +61,7 @@ cd "$DIR"
 [ ! -f SOUL.md ] && [ -f SOUL.example.md ] && cp SOUL.example.md SOUL.md
 [ ! -f athlete/profile.md ] && [ -f athlete/profile.example.md ] && cp athlete/profile.example.md athlete/profile.md
 [ ! -f athlete/notes.md ] && mkdir -p athlete && touch athlete/notes.md
+[ ! -f .env ] && [ -f .env.example ] && cp .env.example .env
 
 # ---- Shell alias ----
 

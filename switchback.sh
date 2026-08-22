@@ -46,7 +46,7 @@ if [ "${1:-}" = "update" ]; then
   for file in COMPANION.md CLAUDE.md AGENTS.md GEMINI.md README.md LICENSE \
               switchback.sh install.sh SOUL.example.md athlete/profile.example.md \
               athlete/activity-note.example.md \
-              .claude/settings.json .mcp.json; do
+              .claude/settings.json .mcp.json .env.example; do
     if [ -f "$TMPDIR/$file" ]; then
       mkdir -p "$(dirname "$file")"
       cp "$TMPDIR/$file" "$file"
@@ -85,7 +85,7 @@ if [ ${#AVAILABLE[@]} -eq 0 ]; then
   echo "No supported agent found. Install one of:"
   echo "  Claude Code:  npm install -g @anthropic-ai/claude-code"
   echo "  Codex CLI:    npm install -g @openai/codex"
-  echo "  Gemini CLI:   npm install -g @anthropic-ai/gemini-cli"
+  echo "  Gemini CLI:   npm install -g @google/gemini-cli"
   exit 1
 fi
 

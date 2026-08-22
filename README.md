@@ -1,11 +1,11 @@
-# ⛰️ Switchback Running
+# Switchback
 
-**Training science companion for ultra trail.** Free and open-source.
+Switchback is an open-source training companion for ultratrail runners. It reads the training data you choose to connect, retrieves exercise-science guidance, and helps you plan, review, and adapt over a season.
 
 ```
-⌚ Your Watch  →  📊 Intervals.icu / Strava  →  🤖 AI Agent  →  ⛰️ Switchback
-  (Garmin,          (training and           (the brain,       (your training
-   Suunto, …)        activity data)          free w/ Gemini)    companion)
+Your watch  →  Intervals.icu / Strava  →  AI agent  →  Switchback
+Garmin, Suunto,      training and activity     reasoning and     your training
+COROS, Apple Watch   data                       conversation      companion
 ```
 
 ## Quickstart
@@ -14,20 +14,13 @@
 curl -fsSL switchback.run/install.sh -o /tmp/sb.sh && bash /tmp/sb.sh
 ```
 
-The installer walks you through everything: installing an AI agent (free with [Gemini CLI](https://github.com/google-gemini/gemini-cli)), connecting [Intervals.icu](https://intervals.icu) and/or [Strava](https://www.strava.com), and setting up your profile. Then type **`switchback`** to start.
+The installer creates a local framework and private athlete files, then guides you through selecting an AI agent, connecting [Intervals.icu](https://intervals.icu) and/or [Strava](https://www.strava.com), and setting up your profile. Start a session with `switchback`.
 
 Also works with [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex CLI](https://github.com/openai/codex), or [OpenClaw](https://github.com/openclaw/openclaw). More at **[switchback.run](https://switchback.run)**.
 
-## Why This Exists
+## Why Switchback
 
-Books like [Training for the Uphill Athlete](#recommended-reading), [Training Essentials for Ultrarunners](#recommended-reading), [Science of Running](#recommended-reading), and [The Happy Runner](#recommended-reading) have distilled decades of coaching wisdom into frameworks any runner can learn from. But most of us train without a coach — and even with one, the day-to-day decisions (what to do when your HRV is down, your schedule just changed, or you're not sure if that soreness is a warning sign) fall on you.
-
-Switchback reads your training data, applies those frameworks, and helps you make better decisions day to day.
-
-> [!IMPORTANT]
-> **Switchback is not a replacement for a human coach.** If you can work with one, you should — see [Working with a Coach](#working-with-a-coach) below. For the many runners who train alone, it offers something better than a static plan: science-based guidance that adapts to how your training is actually going.
-
-We encourage you to [buy the books](#recommended-reading). They're excellent, they'll make you a better and more self-aware athlete, and they support authors who've dedicated their careers to helping runners like us go after their dreams.
+Ultratrail training compounds long-term planning with changing fitness, recovery, weather, work, and family constraints. Switchback turns the resulting stream of workouts, wellness signals, and athlete notes into a durable record that an AI companion can inspect with the runner. Its training framework draws on [Training for the Uphill Athlete](#recommended-reading), [Training Essentials for Ultrarunners](#recommended-reading), [Science of Running](#recommended-reading), and [The Happy Runner](#recommended-reading).
 
 ## What You Can Do
 
@@ -92,7 +85,7 @@ You can ask your companion anything about your training:
 
 ### Make it yours
 
-During setup, you choose a name and personality for your companion. By default your companion is called Virgil, inspired by Dante's faithful companion on his journey to hell and back. You can rename it after anyone who motivates you — a training partner, a runner you admire, that aid station volunteer who saved your race at mile 40. You also choose the tone, humor, and coaching style that work best for you.
+During setup, you choose the companion's name, tone, humor, and level of detail. The default name, Virgil, reflects the system's intended role: a guide who explains the terrain and leaves the decisions to the athlete.
 
 ## Skills (Claude Code)
 
@@ -158,11 +151,13 @@ Open a terminal and run:
 curl -fsSL switchback.run/install.sh -o /tmp/sb.sh && bash /tmp/sb.sh
 ```
 
-That's it. The installer will:
+The installer will:
 - Download the Switchback framework and create a local repo
 - Optionally create a **private GitHub repo** to back up your data (works with Claude Code Cloud too)
 - Install everything and set up the `switchback` command
 - Launch your companion for first-time setup — connecting Intervals.icu and/or Strava, building your athlete profile, and choosing a companion personality
+
+It also creates a local `.env` from `.env.example` for provider credentials. The file stays outside Git.
 
 **After that, just type `switchback` from anywhere to start a session.**
 
@@ -213,17 +208,13 @@ The training framework draws from these books. We recommend them for any ultraru
 - **Science of Running** by Steve Magness — [Amazon](https://www.amazon.com/Science-Running-Efficiently-Ultramarathons-Sprints/dp/0615942946) | [stevemagness.com](https://stevemagness.com)
 - **The Happy Runner** by Dr. Megan Roche & David Roche — [Amazon](https://www.amazon.com/Happy-Runner-Lasting-Running-Success/dp/1492567647) | [SWAP Running](https://www.swaprunning.com)
 
-This project is not affiliated with any of these authors or organizations. If you can work with them directly, you should — Switchback is not a substitute for a real coaching relationship.
+This project is not affiliated with these authors or organizations. Reading their work remains the best way to understand the training frameworks behind Switchback.
 
 ## Working with a Coach
 
-The best thing you can do for your running is work with a real coach. A good coach sees things data can't capture — your form, your confidence, the way you carry stress — and builds a relationship that adapts to who you are, not just what your numbers say.
+Switchback can organize training data, explain a plan, and preserve the context between sessions. A qualified coach can observe form, ask better questions, and adapt to the parts of life that a wearable does not measure. Coaches may also adapt the framework for their own practice; feedback belongs in [GitHub Issues](https://github.com/rlacombe/switchback-running/issues).
 
-Switchback is designed to complement that relationship, not replace it. Between coaching sessions, it can handle the daily details: adjusting a workout when your schedule changes, reviewing an activity, or explaining why a training block is structured the way it is. Some coaches may find it useful in their own practice.
-
-**If you're a coach** and you're curious about how Switchback could support your athletes, please feel free to adopt it! [Let me know](https://github.com/rlacombe/switchback-running/issues) if you find it helpful.
-
-**If you're looking for a coach**, the authors of the [recommended books](#recommended-reading) above all offer coaching services:
+The authors of the [recommended books](#recommended-reading) also offer coaching services:
 - [Evoke Endurance](https://evokeendurance.com) (Scott Johnston)
 - [Jason Koop / CTS](https://jasonkoop.com)
 - [Uphill Athlete](https://uphillathlete.com)
@@ -233,9 +224,7 @@ Switchback is designed to complement that relationship, not replace it. Between 
 ## Disclaimer
 
 > [!IMPORTANT]
-> This project is for informational and educational purposes only. It is not medical advice. Use it at your own risk. The author, [Intervals.icu](https://intervals.icu), [Strava](https://www.strava.com), and the AI providers are not responsible for any injuries, health issues, or other consequences resulting from training decisions you make based on your companion's recommendations. Always consult a qualified healthcare professional before starting or modifying a training program.
-
-Happy trails! Stay safe and have fun out there. 🤟⛰️🏃
+> Switchback provides educational training support. It does not diagnose or treat health conditions. Consult a qualified healthcare professional about pain, illness, injury, or changes to a training program. You remain responsible for training decisions and trail safety.
 
 ## License
 

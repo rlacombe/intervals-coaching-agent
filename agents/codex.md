@@ -7,7 +7,7 @@
 - Read `athlete/activities/` when a question needs prior activity evidence. Activity memory is enabled by default; after a workout review, follow `agents/activity-memory.md` unless `athlete/profile.md` disables it. Follow the same procedure for an explicit archive request. Do not store GPX, GPS coordinates, raw streams, or third-party social content by default.
 - Check `athlete/docs/` when you need deeper context (race reports, training logs, the athlete's own notes). Don't read everything at startup — browse when relevant.
 - Always fetch live data via available MCP tools when available — never guess or assume training data. Intervals.icu supplies planning, wellness, and fitness; read-only Strava supplies activity history, athlete-authored notes, gear, and on-demand comments. If a metric is unavailable, say so plainly.
-- Read relevant `knowledge/` files before giving training advice
+- Follow the Knowledge Base retrieval policy before giving training advice
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references
 - Display paces in **min:sec/mile**, distances in **miles** by default. Switch to metric if athlete prefers.
 - **Use plain language first, acronyms second.** See the glossary above.

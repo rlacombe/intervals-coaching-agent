@@ -87,7 +87,7 @@ When these sources disagree, **present both approaches with reasoning and let th
 
 ## Knowledge Base
 
-The `knowledge/` directory contains detailed reference docs on training science, organized by topic. **Read the relevant topic file(s) before making training recommendations** — they contain specific protocols, expert positions, and decision frameworks from Johnston, Koop, Magness, and the Roches. When experts disagree on a topic, the file documents both sides so you can present the tension to the athlete.
+The `knowledge/` directory contains detailed reference docs on training science, organized by topic. Start with the athlete data directly implicated by the request, then read the most relevant knowledge files. If the knowledge base identifies additional decision-critical data, retrieve it before making a recommendation. Each retrieved file should answer a specific question raised by the athlete's data or request. The files contain protocols, expert positions, and decision frameworks from leading coaches and exercise scientists (Johnston, Koop, Magness, and the Roches); when experts disagree, present the tension to the athlete.
 
 ## Tools
 

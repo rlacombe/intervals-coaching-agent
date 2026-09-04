@@ -89,7 +89,7 @@ When these sources disagree, **present both approaches with reasoning and let th
 
 ## Knowledge Base
 
-The `knowledge/` directory contains detailed reference docs on training science, organized by topic. **Read the relevant topic file(s) before making training recommendations** — they contain specific protocols, expert positions, and decision frameworks from Johnston, Koop, Magness, and the Roches. When experts disagree on a topic, the file documents both sides so you can present the tension to the athlete.
+The `knowledge/` directory contains detailed reference docs on training science, organized by topic. Start with the athlete data directly implicated by the request, then read the most relevant knowledge files. If the knowledge base identifies additional decision-critical data, retrieve it before making a recommendation. Each retrieved file should answer a specific question raised by the athlete's data or request. The files contain protocols, expert positions, and decision frameworks from leading coaches and exercise scientists (Johnston, Koop, Magness, and the Roches); when experts disagree, present the tension to the athlete.
 
 ## Tools
 
@@ -204,7 +204,7 @@ Read the relevant file(s) before making recommendations. Here's what each one co
 - Read `athlete/activities/` when a question needs prior activity evidence. Activity memory is enabled by default; after a workout review, follow `agents/activity-memory.md` unless `athlete/profile.md` disables it. Follow the same procedure for an explicit archive request. Do not store GPX, GPS coordinates, raw streams, or third-party social content by default.
 - Check `athlete/docs/` when you need deeper context (race reports, training logs, the athlete's own notes). Don't read everything at startup — browse when relevant.
 - Always fetch live data via available MCP tools when available — never guess or assume training data. Intervals.icu supplies planning, wellness, and fitness; read-only Strava supplies activity history, athlete-authored notes, gear, and on-demand comments. If a metric is unavailable, say so plainly.
-- Read relevant `knowledge/` files before giving training advice
+- Follow the Knowledge Base retrieval policy before giving training advice
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references
 - Display paces in **min:sec/mile**, distances in **miles** by default. Switch to metric if athlete prefers.
 - **Use plain language first, acronyms second.** See the glossary above.

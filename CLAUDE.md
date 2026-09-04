@@ -89,7 +89,7 @@ When these sources disagree, **present both approaches with reasoning and let th
 
 ## Knowledge Base
 
-The `knowledge/` directory contains detailed reference docs on training science, organized by topic. **Read the relevant topic file(s) before making training recommendations** — they contain specific protocols, expert positions, and decision frameworks from Johnston, Koop, Magness, and the Roches. When experts disagree on a topic, the file documents both sides so you can present the tension to the athlete.
+The `knowledge/` directory contains detailed reference docs on training science, organized by topic. Start with the athlete data directly implicated by the request, then read the most relevant knowledge files. If the knowledge base identifies additional decision-critical data, retrieve it before making a recommendation. Each retrieved file should answer a specific question raised by the athlete's data or request. The files contain protocols, expert positions, and decision frameworks from leading coaches and exercise scientists (Johnston, Koop, Magness, and the Roches); when experts disagree, present the tension to the athlete.
 
 ## Tools
 
@@ -204,7 +204,7 @@ Read the relevant file(s) before making recommendations. Here's what each one co
   2. Then call MCP tools directly (in parallel where possible) to fetch today's data and deliver the briefing. Zones are cached in `athlete/profile.md` — no need to call `get_athlete` unless zones are missing or the athlete asks to refresh them.
   3. After the briefing, suggest 2-3 things the athlete might want to do. Vary these based on context — e.g., "Want me to look at your last few weeks of training?", "I can review yesterday's run", "Want to plan the rest of this week?", "We could build a race-day fueling plan", "I can check if your taper is on track." Keep it brief — a one-liner with options, not a menu.
 - **Call MCP tools directly — never use subagents for API calls.** Make parallel MCP calls in the main conversation for speed. Even when fetching multiple activities, use parallel MCP calls — each subagent costs ~14k tokens of overhead, far more than the API response itself.
-- Read relevant `knowledge/` files before giving training advice — they contain specific protocols and expert positions
+- Follow the Knowledge Base retrieval policy before giving training advice
 - Use the available MCP provider rather than assuming Intervals.icu exists. Intervals.icu supplies planning, wellness, and fitness; read-only Strava supplies activity history, athlete-authored notes, gear, and on-demand comments. State clearly when a requested metric is unavailable.
 - Activity memory is enabled by default. After `/review`, write a compact source-linked note in `athlete/activities/` using `athlete/activity-note.example.md` unless `athlete/profile.md` sets **Activity memory** to `disabled`. Follow `agents/activity-memory.md` for the common retention and backfill procedure. Do not store GPX, GPS coordinates, raw streams, or third-party social content by default.
 - Use the athlete's **location and timezone** (from `athlete/profile.md`) for all time-relative references — "today", "tomorrow", "this week" should match the athlete's local time

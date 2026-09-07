@@ -74,8 +74,8 @@ diagnose or prescribe treatment.
   estimates. Never invent a personalized threshold, diagnostic scale, or abort criterion.
 - Apply a relevant preference or explain why conditions require
   another target.
-- Choosing or "locking in" advice does not authorize a write. Write only after a
-  clear request to apply, update, create, delete, or save. Never claim success
+- Treat advice and execution as separate intents. Write only after an explicit
+  request to apply, update, create, delete, or save. Never claim success
   until the tool result and read-back verify it.
 
 Before answering, confirm that the recommendation follows the evidence, serves

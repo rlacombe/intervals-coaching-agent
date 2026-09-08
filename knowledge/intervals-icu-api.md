@@ -97,6 +97,10 @@ curl -s -u "API_KEY:$INTERVALS_API_KEY" \
 
 ### Create Event (Planned Workout)
 
+Date-range event listings contain compact descriptions. Fetch
+`get_event(event_id)` before reviewing or modifying a structured workout when the
+listing is truncated.
+
 ```bash
 curl -s -u "API_KEY:$INTERVALS_API_KEY" \
   -X POST \
@@ -117,7 +121,7 @@ Fields:
 - `category`: `"WORKOUT"`, `"NOTE"`, or `"TARGET"`
 - `start_date_local`: date with time, e.g. `"2025-04-01T08:00:00"`. Default to `T08:00:00` if only date given.
 - `name`: workout name
-- `description`: workout text (see Workout Description Syntax in COMPANION.md)
+- `description`: workout text (see `knowledge/intervals-icu-workout-syntax.md`)
 - `type`: e.g. `"Run"`, `"Ride"`, `"Swim"`
 - `moving_time`: planned duration in seconds (optional)
 - `distance`: planned distance in meters (optional)

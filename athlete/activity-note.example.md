@@ -1,12 +1,15 @@
 ---
 id: "strava:1234567890"
 provider: strava
-source_activity_id: "1234567890"
+source_activity_ids: ["strava:1234567890"]
 start_date_local: "2026-08-14T06:30:00-07:00"
 timezone: America/Los_Angeles
 activity_type: TrailRun
 tags: [long-run, trail]
 retrieved_at: "2026-08-14T16:00:00-07:00"
+record_status: current
+supersedes: null
+superseded_by: null
 streams_available: true
 route_retained: false
 ---
@@ -34,9 +37,11 @@ Optional athlete-authored description from the activity provider. Do not copy th
 
 What was planned, what happened, and any material deviation.
 
-## Companion assessment
+## Derived assessment (hypothesis)
 
-A short, evidence-based interpretation. Put only durable cross-workout patterns in `athlete/notes.md`.
+A short interpretation derived from the evidence above. Label uncertainty and do
+not present a possible explanation as a provider fact. Put only durable,
+repeated cross-workout patterns in `athlete/notes.md`.
 
 ## Data retention
 

@@ -16,6 +16,29 @@ fi
 UPSTREAM="rlacombe/switchback-running"
 PREF_FILE=".switchback-agent"
 
+# ---- Deterministic framework operations ----
+
+case "${1:-}" in
+  route)
+    shift
+    exec node scripts/route-workflow.mjs "$@"
+    ;;
+  reconcile)
+    shift
+    exec node scripts/reconcile-activities.mjs "$@"
+    ;;
+  resource)
+    [ "${2:-}" = "read" ] || { echo "Usage: switchback resource read <path>" >&2; exit 2; }
+    shift 2
+    exec node scripts/read-resource.mjs "$@"
+    ;;
+  memory)
+    [ "${2:-}" = "sync" ] || { echo "Usage: switchback memory sync [--intervals file] [--strava file] --through YYYY-MM-DD" >&2; exit 2; }
+    shift 2
+    exec node scripts/sync-activity-memory.mjs "$@"
+    ;;
+esac
+
 # ---- Update command ----
 
 if [ "${1:-}" = "update" ]; then
@@ -24,28 +47,40 @@ if [ "${1:-}" = "update" ]; then
   echo "================================"
   echo ""
 
-  # Download latest tarball from GitHub
+  # Resolve once, then download that immutable commit.
   TMPDIR=$(mktemp -d)
   trap "rm -rf $TMPDIR" EXIT
 
   echo "  → Downloading latest version..."
-  curl -sL "https://github.com/$UPSTREAM/tarball/main" | tar xz -C "$TMPDIR" --strip-components=1
+  LATEST=$(curl --connect-timeout 5 --max-time 20 -sf "https://api.github.com/repos/$UPSTREAM/commits/main" \
+    | grep '"sha"' | head -1 | cut -d'"' -f4)
+  [ -n "$LATEST" ] || { echo "Unable to resolve the latest Switchback commit." >&2; exit 1; }
+  ARCHIVE="$TMPDIR/switchback.tar.gz"
+  curl --connect-timeout 5 --max-time 120 -fsSL "https://github.com/$UPSTREAM/archive/$LATEST.tar.gz" -o "$ARCHIVE"
+  tar tzf "$ARCHIVE" >/dev/null
+  tar xzf "$ARCHIVE" -C "$TMPDIR" --strip-components=1
 
   # Framework files to overwrite (everything except personal data)
   echo "  → Updating framework files..."
 
   # Directories — sync entirely
-  for dir in knowledge agents scripts src .claude/skills .gemini; do
+  for dir in knowledge agents scripts src skills docs .gemini; do
     if [ -d "$TMPDIR/$dir" ]; then
       rm -rf "$dir"
       cp -r "$TMPDIR/$dir" "$dir"
     fi
   done
 
+
+  # Claude discovers the same provider-neutral skills through its native path.
+  rm -rf .claude/skills
+  ln -s ../skills .claude/skills
+
   # Root files — overwrite framework, skip personal
   for file in COMPANION.md CLAUDE.md AGENTS.md GEMINI.md README.md LICENSE \
               switchback.sh install.sh SOUL.example.md athlete/profile.example.md \
-              athlete/activity-note.example.md \
+              athlete/activity-note.example.md athlete/checkpoint.example.md \
+              athlete/activities-index.example.md athlete/monthly-summary.example.md \
               .claude/settings.json .mcp.json .env.example; do
     if [ -f "$TMPDIR/$file" ]; then
       mkdir -p "$(dirname "$file")"
@@ -56,19 +91,15 @@ if [ "${1:-}" = "update" ]; then
   # Make scripts executable
   chmod +x switchback.sh install.sh scripts/*.sh 2>/dev/null || true
 
-  # Commit if there are changes
-  if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null; then
-    git add -A
-    git commit -m "Update Switchback framework to latest"
-    echo "  ✓ Framework updated and committed"
-
-    # Push if we have a remote
-    if git remote get-url origin &>/dev/null 2>&1; then
-      git push 2>/dev/null && echo "  ✓ Pushed to your repo" || echo "  → Push skipped (no remote or auth issue)"
-    fi
+  # Leave framework changes visible for review. Never commit or push automatically.
+  if ! git diff --quiet -- ':!athlete/' ':!SOUL.md' 2>/dev/null || \
+     [ -n "$(git ls-files --others --exclude-standard -- ':!athlete/' ':!SOUL.md' 2>/dev/null)" ]; then
+    echo "  ✓ Framework updated; review and commit the changes when ready"
   else
     echo "  ✓ Already up to date"
   fi
+
+  echo "$LATEST" > "$VERSION_FILE"
 
   echo ""
   exit 0
@@ -142,28 +173,11 @@ if ! printf '%s\n' "${AVAILABLE[@]}" | grep -qx "$AGENT"; then
   exit 1
 fi
 
-# ---- Build context ----
-# Preload SOUL + athlete profile + notes into system prompt so the
-# companion has personality, timezone, and athlete context from the
-# very first token — no file reads needed at startup.
-
-CONTEXT=$(mktemp)
-trap "rm -f $CONTEXT" EXIT
-
-# Inject current local date and time so the companion knows the time of day
-echo "# Current Date and Time" >> "$CONTEXT"
-echo "Right now it is $(date '+%A, %B %-d, %Y at %-I:%M %p %Z')." >> "$CONTEXT"
-echo "" >> "$CONTEXT"
-
-[ -f SOUL.md ] && cat SOUL.md >> "$CONTEXT"
-[ -f athlete/profile.md ] && { echo ""; echo "# Athlete Profile"; cat athlete/profile.md; } >> "$CONTEXT"
-[ -f athlete/notes.md ] && { echo ""; echo "# Companion Notes"; cat athlete/notes.md; } >> "$CONTEXT"
-
 # ---- Launch ----
 
 case "$AGENT" in
   claude)
-    exec claude --append-system-prompt-file "$CONTEXT" "Hey!"
+    exec claude "Hey!"
     ;;
 
   codex)

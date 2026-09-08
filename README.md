@@ -165,27 +165,63 @@ You can also open your private repo in [Claude Code Desktop](https://claude.ai/c
 
 ### Updating
 
-**Updates happen automatically.** At the start of each session, Switchback checks for new versions and updates the framework in the background. Your personal data (athlete profile, companion notes, race plans) is never touched.
+At session start, Switchback checks whether an update exists. It changes nothing
+until you run `switchback update`. The update is downloaded from the resolved,
+immutable Git commit and leaves changes uncommitted for review. Athlete files are
+never overwritten.
 
 ### How it works
 
-Switchback is not a traditional app — there's no UI, no server to run. The repository is a knowledge base and companion framework that your AI agent reads automatically. When you start a session, your companion greets you, pulls available training data from Intervals.icu and/or Strava, and picks up where you left off.
+Switchback is not a traditional app — there's no UI or application server. The
+repository supplies a contract, shared workflow skills, knowledge, and private
+athlete memory to the selected CLI agent. The agent retrieves current provider
+data when the athlete's request requires it.
 
 ### Activity memory
 
-Activity memory is enabled by default. After a post-workout review, Switchback stores a compact, source-linked Markdown note in your private `athlete/activities/YYYY/MM/` directory. The note gives the companion durable evidence without turning your repository into a copy of a fitness platform. To opt out of automatic archival, set **Activity memory** to `disabled` in `athlete/profile.md`.
+Activity memory is enabled by default. Once per session after activity-related
+work, Switchback synchronizes completed workouts newer than the last successful
+sync or latest local record. A
+post-workout review also stores a compact, source-linked Markdown note in your
+private `athlete/activities/YYYY/MM/` directory. These notes give the companion
+durable evidence without turning your repository into a copy of a fitness
+platform. To opt out, set **Activity memory** to `disabled` in
+`athlete/profile.md`.
+
+Framework operations used by the agents are also available directly:
+
+```bash
+switchback route "plan race nutrition"
+switchback resource read athlete/profile.md
+switchback reconcile /tmp/intervals.json /tmp/strava.json
+switchback memory sync --intervals /tmp/intervals.json --through 2026-09-08
+```
 
 Each note retains:
 
 - activity source ID, local time, type, tags, distance, duration, elevation, pace, heart rate, load, power/cadence, perceived exertion, and gear when available;
 - your activity description when it adds context;
-- planned-versus-actual context and a concise companion assessment.
+- planned-versus-actual context and an interpretation labeled as a hypothesis or
+  decision.
 
 It deliberately does **not** copy GPX/FIT/TCX files, raw GPS coordinates, full streams, or friends' comments. GPS and streams can expose sensitive locations and are both large and already provider-hosted. Friends' comments are third-party data: Switchback retrieves them only when asked and never archives them without your explicit instruction.
 
-`/review` writes a note for the workout it analyzes while activity memory is enabled. During setup, Switchback offers to backfill history but requires you to choose the lookback period, such as 1, 3, 6, or 12 months. You can also request it later with `/archive`, for example: `archive my trail runs from the last 3 months`. There is no background sync daemon, so no historical activity is archived without an explicit request. See [activity-memory.md](docs/activity-memory.md) for the full retention policy and [the note template](athlete/activity-note.example.md) for the on-disk schema.
+Synchronization happens only while the companion is active; there is no
+background daemon. Notes are validated before the synchronization marker
+advances. On first use, Switchback asks you to choose an initial
+lookback period, such as 1, 3, 6, or 12 months. It never silently selects how
+much history to import. `/review` writes the workout it analyzes, and `/archive`
+can backfill or refresh a requested range, for example: `archive my trail runs
+from the last 3 months`. See [activity-memory.md](docs/activity-memory.md) for
+the retention policy and [the note template](athlete/activity-note.example.md)
+for the on-disk schema.
 
-Your personal data (athlete profile, training zones, coaching notes, companion persona) lives in your private repo and is never shared publicly. You can launch Switchback from any machine — your data travels with you.
+Your personal data (athlete profile, training zones, notes, and companion persona)
+lives in your private repo and is never shared publicly by Switchback. The CLI
+model provider receives files and tool results that the agent reads. Review that
+provider's data policy before use, redact sensitive notes when needed, or use a
+compatible local model. You can launch Switchback from any machine where you
+choose to make the private repository available.
 
 ## Training Philosophy
 
@@ -197,7 +233,11 @@ Three principles guide every recommendation:
 
 ### Knowledge Base
 
-The `knowledge/` directory contains 18 reference docs covering training science topics — from aerobic base and periodization to race execution and injury prevention. Each doc synthesizes positions from Johnston, Koop, Magness, and the Roches with specific protocols, quotes, and decision frameworks. Your companion reads these before making recommendations.
+The `knowledge/` directory contains reference documents covering training
+science from aerobic development to race execution and injury prevention. The
+files distinguish research findings, coaching frameworks, heuristics, and worked
+examples under the [evidence policy](knowledge/README.md). Your companion reads
+only the chapters relevant to the decision.
 
 ## Recommended Reading
 

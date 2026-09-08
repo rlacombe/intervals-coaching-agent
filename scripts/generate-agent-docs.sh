@@ -1,5 +1,6 @@
 #!/bin/bash
-# Generates CLAUDE.md, AGENTS.md, and GEMINI.md from COMPANION.md + agent appendices
+# Generates harness contracts from the canonical contract and, where needed, a
+# provider-specific adapter.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -8,27 +9,21 @@ if [ ! -f COMPANION.md ]; then
   exit 1
 fi
 
-for agent in claude codex gemini; do
-  appendix="agents/${agent}.md"
-  if [ ! -f "$appendix" ]; then
-    echo "Warning: $appendix not found, skipping" >&2
-    continue
-  fi
-
-  case "$agent" in
-    claude) output="CLAUDE.md" ;;
-    codex)  output="AGENTS.md" ;;
-    gemini) output="GEMINI.md" ;;
-  esac
-
+for output in AGENTS.md GEMINI.md; do
   {
-    echo "<!-- Generated from COMPANION.md + agents/${agent}.md — do not edit directly -->"
+    echo "<!-- Generated from COMPANION.md — do not edit directly -->"
     echo ""
     cat COMPANION.md
-    echo ""
-    echo ""
-    cat "$appendix"
   } > "$output"
-
   echo "Generated $output"
 done
+
+{
+  echo "<!-- Generated from COMPANION.md + agents/claude.md — do not edit directly -->"
+  echo ""
+  cat COMPANION.md
+  echo ""
+  echo ""
+  cat agents/claude.md
+} > CLAUDE.md
+echo "Generated CLAUDE.md"

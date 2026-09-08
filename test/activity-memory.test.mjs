@@ -10,40 +10,44 @@ async function read(relativePath) {
 
 test("activity memory defaults to enabled and has a persistent opt-out", async () => {
   const profile = await read("athlete/profile.example.md");
-  const companion = await read("COMPANION.md");
-  const review = await read(".claude/skills/review/SKILL.md");
+  const memoryPolicy = await read("agents/memory-policy.md");
+  const review = await read("skills/review/SKILL.md");
 
   assert.match(profile, /Activity memory:\*\* enabled \(default/);
   assert.match(profile, /set to `disabled`/);
-  assert.match(companion, /Activity memory is enabled by default/);
-  assert.match(review, /Activity memory\*\* preference/);
-  assert.match(review, /set it to `disabled`/);
+  assert.match(memoryPolicy, /Activity memory is enabled unless/);
+  assert.match(memoryPolicy, /agents\/activity-memory\.md/);
+  assert.match(review, /When activity memory is enabled/);
+  assert.match(review, /archive the workout/);
 });
 
 test("historical backfill requires an athlete-selected lookback period", async () => {
-  const archive = await read(".claude/skills/archive/SKILL.md");
-  const setup = await read(".claude/skills/setup/SKILL.md");
+  const archive = await read("skills/archive/SKILL.md");
+  const setup = await read("skills/setup/SKILL.md");
   const procedure = await read("agents/activity-memory.md");
 
   for (const document of [archive, setup, procedure]) assert.match(document, /1, 3, 6, or 12 months/);
-  assert.match(archive, /Do not choose a period or archive historical activities silently/);
-  assert.match(setup, /Do not backfill until they explicitly choose a period/);
+  assert.match(archive, /do not choose or query a historical.*silently/is);
+  assert.match(setup, /Do not query or archive history.*explicitly chooses/is);
   assert.match(procedure, /Never silently choose a period/);
-  assert.match(archive, /explicit `\/archive` request always proceeds/i);
+  assert.match(archive, /explicit archive request proceeds/i);
 });
 
 test("all agent harnesses share the activity-memory procedure", async () => {
-  const [claude, codex, gemini, procedure] = await Promise.all([
-    read("agents/claude.md"),
-    read("agents/codex.md"),
-    read("agents/gemini.md"),
+  const [claude, codex, gemini, procedure, memoryPolicy] = await Promise.all([
+    read("CLAUDE.md"),
+    read("AGENTS.md"),
+    read("GEMINI.md"),
     read("agents/activity-memory.md"),
+    read("agents/memory-policy.md"),
   ]);
 
   for (const document of [claude, codex, gemini]) {
     assert.match(document, /agents\/activity-memory\.md/);
-    assert.match(document, /Activity memory is enabled by default/);
+    assert.match(document, /agents\/memory-policy\.md/);
   }
+  assert.match(memoryPolicy, /Activity memory is enabled unless/);
   assert.match(procedure, /GPX\/TCX\/FIT/);
   assert.match(procedure, /third-party comments/);
+  assert.match(procedure, /archive every missing completed workout/i);
 });

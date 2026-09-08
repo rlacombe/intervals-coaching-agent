@@ -6,6 +6,7 @@ import { createInterface } from "readline";
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { traceOperation } from "./trace.mjs";
 
 try {
   const envFile = join(dirname(fileURLToPath(import.meta.url)), "..", ".env");
@@ -23,6 +24,7 @@ const CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET;
 let refreshToken = process.env.STRAVA_REFRESH_TOKEN;
 let accessToken;
 let accessTokenExpiresAt = 0;
+const REQUEST_TIMEOUT_MS = Number(process.env.SWITCHBACK_HTTP_TIMEOUT_MS || 15000);
 
 function configured() {
   return Boolean(CLIENT_ID && CLIENT_SECRET && refreshToken);
@@ -50,6 +52,7 @@ async function getAccessToken() {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body,
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   });
   if (!response.ok) throw new Error(`Strava OAuth ${response.status}: ${await response.text()}`);
   const token = await response.json();
@@ -65,6 +68,7 @@ async function api(path, options = {}) {
   const token = await getAccessToken();
   const response = await fetch(`https://www.strava.com/api/v3${path}`, {
     ...options,
+    signal: options.signal || AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     headers: { Authorization: `Bearer ${token}`, ...options.headers },
   });
   if (!response.ok) throw new Error(`Strava API ${response.status}: ${await response.text()}`);
@@ -194,9 +198,18 @@ function handleRequest(request) {
   if (method === "tools/call") {
     const tool = TOOLS.find(candidate => candidate.name === params.name);
     if (!tool) return send({ jsonrpc: "2.0", id, result: { isError: true, content: [{ type: "text", text: `Unknown tool: ${params.name}` }] } });
-    tool.handler(params.arguments || {})
-      .then(data => send({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] } }))
-      .catch(error => send({ jsonrpc: "2.0", id, result: { isError: true, content: [{ type: "text", text: String(error.message || error) }] } }));
+    const started = Date.now();
+    const args = params.arguments || {};
+    const traceArgs = Object.fromEntries(Object.entries(args).filter(([key]) => ["id", "oldest", "newest", "types", "include_location"].includes(key)));
+    tool.handler(args)
+      .then(data => {
+        traceOperation({ kind: "tool", tool: tool.name, arguments: traceArgs, ok: true, duration_ms: Date.now() - started });
+        send({ jsonrpc: "2.0", id, result: { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] } });
+      })
+      .catch(error => {
+        traceOperation({ kind: "tool", tool: tool.name, arguments: traceArgs, ok: false, duration_ms: Date.now() - started, error_type: error?.constructor?.name || "Error" });
+        send({ jsonrpc: "2.0", id, result: { isError: true, content: [{ type: "text", text: String(error.message || error) }] } });
+      });
     return;
   }
   if (method?.startsWith("notifications/")) return;

@@ -13,8 +13,9 @@
 - **Training week:** [typical structure, days available, trail access]
 - **Cross-training:** [other sports — bike, swim, ski, etc.]
 - **Goals:** [short-term and long-term]
-- **Activity memory:** enabled (default; set to `disabled` to stop automatic archival after reviews)
+- **Activity memory:** enabled (default; set to `disabled` to stop automatic activity synchronization and archival after reviews)
 - **Activity-memory backfill:** none (optional; record the selected lookback after archival)
+- **Activity-memory last sync:** never (updated only after successful synchronization)
 
 ## Zones
 
@@ -54,4 +55,5 @@
 
 ## Why You Run
 
-This section is yours to fill in. Your coach should understand *why* you run — not just what race you're training for. This framing shapes every recommendation.
+This section is yours to fill in. Your companion should understand *why* you run,
+not only which race you are training for. This framing shapes every recommendation.

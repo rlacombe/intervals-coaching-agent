@@ -72,3 +72,14 @@ test("Intervals MCP remains available to Strava-only users", async () => {
   assert.equal(responses[1].result.isError, true);
   assert.match(responses[1].result.content[0].text, /INTERVALS_API_KEY/);
 });
+
+test("Intervals MCP rejects malformed writes before network access", async () => {
+  const [response] = await runMcp("src/index.mjs", [
+    { jsonrpc: "2.0", id: 1, method: "tools/call", params: {
+      name: "create_event", arguments: { name: "Run", start_date_local: "tomorrow" },
+    } },
+  ]);
+
+  assert.equal(response.result.isError, true);
+  assert.match(response.result.content[0].text, /YYYY-MM-DD/);
+});

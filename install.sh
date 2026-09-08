@@ -45,7 +45,14 @@ fi
 
 info "Downloading Switchback..."
 TMP=$(mktemp -d)
-curl -fsSL "https://github.com/$UPSTREAM/tarball/main" | tar xz -C "$TMP" --strip-components=1
+LATEST=$(curl --connect-timeout 5 --max-time 20 -sf "https://api.github.com/repos/$UPSTREAM/commits/main" \
+  | grep '"sha"' | head -1 | cut -d'"' -f4)
+[ -n "$LATEST" ] || { error "Could not resolve the latest release."; exit 1; }
+ARCHIVE="$TMP/switchback.tar.gz"
+curl --connect-timeout 5 --max-time 120 -fsSL "https://github.com/$UPSTREAM/archive/$LATEST.tar.gz" -o "$ARCHIVE"
+tar tzf "$ARCHIVE" >/dev/null || { error "Downloaded archive is invalid."; exit 1; }
+tar xzf "$ARCHIVE" -C "$TMP" --strip-components=1
+rm "$ARCHIVE"
 if [ ! -f "$TMP/switchback.sh" ]; then
   error "Download failed. Check your internet connection."
   rm -rf "$TMP"
@@ -58,9 +65,12 @@ ok "Installed to $DIR"
 # ---- Create personal files from templates ----
 
 cd "$DIR"
+echo "$LATEST" > .switchback-version
 [ ! -f SOUL.md ] && [ -f SOUL.example.md ] && cp SOUL.example.md SOUL.md
 [ ! -f athlete/profile.md ] && [ -f athlete/profile.example.md ] && cp athlete/profile.example.md athlete/profile.md
 [ ! -f athlete/notes.md ] && mkdir -p athlete && touch athlete/notes.md
+[ ! -f athlete/checkpoint.md ] && [ -f athlete/checkpoint.example.md ] && cp athlete/checkpoint.example.md athlete/checkpoint.md
+[ ! -f athlete/activities/index.md ] && [ -f athlete/activities-index.example.md ] && mkdir -p athlete/activities && cp athlete/activities-index.example.md athlete/activities/index.md
 [ ! -f .env ] && [ -f .env.example ] && cp .env.example .env
 
 # ---- Shell alias ----

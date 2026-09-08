@@ -9,13 +9,14 @@ test("canonical contract preserves core decision invariants", async () => {
   const contract = await read("COMPANION.md");
   for (const phrase of [
     "as\\s+evidence",
-    "Set the health boundary",
+    "Apply health triage",
     "least\\s+restrictive safe action",
-    "Continuity through adaptation",
+    "Long-Horizon Operation",
     "prior expectation, observed outcome",
     "long-term development; target events",
     "athlete/notes.md",
   ]) assert.match(contract, new RegExp(phrase));
+  assert.ok(contract.indexOf("## Decision Kernel") < contract.indexOf("## Long-Horizon Operation"));
 });
 
 test("deferred policies preserve tool, privacy, and memory invariants", async () => {
@@ -32,7 +33,7 @@ test("all generated harnesses share the canonical operations", async () => {
   const contracts = await Promise.all(["CLAUDE.md", "AGENTS.md", "GEMINI.md"].map(read));
   for (const contract of contracts) {
     assert.doesNotMatch(contract, /deliver the briefing|suggest 2-3 things/);
-    assert.match(contract, /## Operations/);
+    assert.match(contract, /## Long-Horizon Operation/);
     assert.match(contract, /Call MCP tools directly/);
     assert.match(contract, /agents\/activity-memory\.md/);
     assert.doesNotMatch(contract, /SWITCHBACK_TRACE_FILE|evaluation runners/i);
@@ -41,16 +42,16 @@ test("all generated harnesses share the canonical operations", async () => {
 
 test("contract routes before retrieval and keeps traces internal", async () => {
   const contract = await read("COMPANION.md");
-  assert.ok(contract.indexOf("Select the relevant skill") < contract.indexOf("Retrieve athlete evidence"));
-  assert.match(contract, /Keep\s+procedure names and traces out of athlete-facing prose/i);
+  assert.ok(contract.indexOf("Retrieve athlete evidence first") < contract.indexOf("then load a relevant skill"));
+  assert.match(contract, /Keep\s+internal procedures and traces out of\s+athlete-facing prose/i);
 });
 
 test("contract defines consequential work, continuity, memory authority, and private retrieval", async () => {
   const contract = await read("COMPANION.md");
-  assert.match(contract, /Advice is consequential when it changes/);
+  assert.match(contract, /For consequential decisions/);
   assert.ok(contract.indexOf("athlete/checkpoint.md") < contract.indexOf("SOUL.md"));
   assert.ok(contract.indexOf("athlete/profile.md") < contract.indexOf("athlete/notes.md"));
-  assert.match(contract, /what the athlete reports/);
+  assert.match(contract, /Athlete statements\s+establish their reports/);
   assert.match(contract, /agents\/memory-policy.md/);
 });
 
